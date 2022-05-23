@@ -1,0 +1,81 @@
+
+
+div{
+    position: relative;
+}
+
+#inside{
+    background: url(./Assets/inside2.png);
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9;
+}
+.insideHide{
+    display:none;
+}
+
+
+
+#inside2{
+    background: url(./Assets/inside1.png);
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 8;
+}
+.inside2Hide{
+    display:none;
+}
+
+
+#outside{
+    background: url(./Assets/newmapoutside.bmp);
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 7;
+}
+.outsideHide{
+    display:none;
+}
+
+#cave{
+    background: url(./Assets/cave.png);
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 6;
+}
+.caveHide{
+    display:none;
+}
+
+
+#outside2{
+    background: url(./Assets/outside2.png);
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
+}
+.outside2Hide{
+    display:none;
+}
+
+#gym{
+    background: url(./Assets/gym\ floor.png);
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 4;
+}
+.gymHide{
+    display:none;
+}
