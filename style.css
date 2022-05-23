@@ -12,9 +12,7 @@ div{
     top: 0;
     z-index: 9;
 }
-.insideHide{
-    display:none;
-}
+
 
 
 
@@ -26,9 +24,7 @@ div{
     top: 0;
     z-index: 8;
 }
-.inside2Hide{
-    display:none;
-}
+
 
 
 #outside{
@@ -39,9 +35,7 @@ div{
     top: 0;
     z-index: 7;
 }
-.outsideHide{
-    display:none;
-}
+
 
 #cave{
     background: url(./Assets/cave.png);
@@ -51,9 +45,7 @@ div{
     top: 0;
     z-index: 6;
 }
-.caveHide{
-    display:none;
-}
+
 
 
 #outside2{
@@ -64,9 +56,7 @@ div{
     top: 0;
     z-index: 5;
 }
-.outside2Hide{
-    display:none;
-}
+
 
 #gym{
     background: url(./Assets/gym\ floor.png);
@@ -75,7 +65,4 @@ div{
     left: 0;
     top: 0;
     z-index: 4;
-}
-.gymHide{
-    display:none;
 }
