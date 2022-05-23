@@ -52,27 +52,27 @@ class Object {
 window.addEventListener("DOMContentLoaded", function (e) {
     //FIRST ROOM//
     dude1 = new Object(430, 200, "black", 20, 20);
-    door1 = new Object(0, 320, "red", 30, 20);
+    door1 = new Object(0, 320, "transparent", 30, 20);
 
     //SECOND ROOM//
-    door2 = new Object(170, 620, "red", 40, 20);
-    door3 = new Object(360, 260, "red", 40, 20);
+    door2 = new Object(170, 620, "transparent", 40, 20);
+    door3 = new Object(360, 260, "transparent", 40, 20);
 
     //OUTSIDE//
-    door4 = new Object(130, 220, "red", 40, 20);
-    cave = new Object(450, 90, "red", 30, 20);
+    door4 = new Object(130, 220, "transparent", 40, 20);
+    cave = new Object(450, 90, "transparent", 30, 20);
 
     //CAVE//
-    cave2 = new Object(430, 0, "red", 80, 20);
-    cave3 = new Object(140, 400, "red", 80, 20);
+    cave2 = new Object(430, 0, "transparent", 80, 20);
+    cave3 = new Object(140, 400, "transparent", 80, 20);
 
     //OUTSIDE2//
-    cave4 = new Object(450, 90, "red", 30, 20);
-    gym = new Object(130, 320, "red", 30, 20);
+    cave4 = new Object(450, 90, "transparent", 30, 20);
+    gym = new Object(130, 320, "transparent", 30, 20);
 
     //GYM//
-    gym2 = new Object(220,630,"red",160,20);
-    gym3 = new Object(220,630,"red",160,20);
+    gym2 = new Object(220,630,"transparent",160,20);
+    gym3 = new Object(220,630,"transparent",160,20);
 
 
     const runGame = setInterval(gameLoop, 120);
