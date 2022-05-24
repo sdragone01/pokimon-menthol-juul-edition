@@ -11,6 +11,14 @@ div{
     
 }
 
+#caveFightSequenceHide {
+    display: none;
+   
+}
+#CaveFightSequence{
+    
+}
+
 #buttonBlock{
     background-size: contain;
     position: absolute;
@@ -74,6 +82,19 @@ div{
     z-index: 15;
 }
 #cHealthNum{
+    background-size: contain;
+    position: absolute;
+ 
+  
+    margin-top: 70px;
+   margin-left: 150px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+   text-align: left;
+    opacity: .6;
+    z-index: 15;
+}
+#c2HealthNum{
     background-size: contain;
     position: absolute;
  

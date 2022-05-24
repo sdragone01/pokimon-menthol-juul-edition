@@ -69,6 +69,7 @@ window.addEventListener("DOMContentLoaded", function (e) {
     //CAVE//
     cave2 = new Object(430, 0, "red", 80, 20);
     cave3 = new Object(140, 400, "red", 80, 20);
+    caveFight = new Object()
 
     //OUTSIDE2//
     cave4 = new Object(450, 90, "red", 30, 20);
@@ -205,6 +206,8 @@ function pokeHealed(){
     let newHealth = 100;
     pHealth.textContent = newHealth;
     alert("Your Pokemon Were Healed!");
+    dude1.x = 320;
+    dude1.y = 510;
 
 }
 
