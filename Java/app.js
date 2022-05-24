@@ -5,6 +5,7 @@ let inside1C = inside.getContext('2d');
 let dude1;
 let door1;
 
+
 //SECOND ROOM//
 let door2;
 let door3;
@@ -13,6 +14,7 @@ let door3;
 let grass;
 let door4;
 let cave;
+let pokeCenter;
 
 //CAVE//
 let cave2;
@@ -52,28 +54,28 @@ class Object {
 window.addEventListener("DOMContentLoaded", function (e) {
     //FIRST ROOM//
     dude1 = new Object(430, 200, "black", 20, 20);
-    door1 = new Object(0, 320, "transparent", 30, 20);
+    door1 = new Object(0, 320, "red", 30, 20);
 
     //SECOND ROOM//
-    door2 = new Object(170, 620, "transparent", 40, 20);
-    door3 = new Object(360, 260, "transparent", 40, 20);
+    door2 = new Object(170, 620, "red", 40, 20);
+    door3 = new Object(360, 260, "red", 40, 20);
 
     //OUTSIDE//
-    door4 = new Object(130, 220, "transparent", 40, 20);
-    cave = new Object(450, 90, "transparent", 30, 20);
+    door4 = new Object(130, 220, "red", 40, 20);
+    cave = new Object(450, 90, "red", 30, 20);
     grass = new Object(330,260 ,"red",180,20 );
+    pokeCenter = new Object(320,480,"red",30,20);
 
     //CAVE//
-    cave2 = new Object(430, 0, "transparent", 80, 20);
-    cave3 = new Object(140, 400, "transparent", 80, 20);
+    cave2 = new Object(430, 0, "red", 80, 20);
+    cave3 = new Object(140, 400, "red", 80, 20);
 
     //OUTSIDE2//
-    cave4 = new Object(450, 90, "transparent", 30, 20);
-    gym = new Object(130, 320, "transparent", 30, 20);
+    cave4 = new Object(450, 90, "red", 30, 20);
+    gym = new Object(130, 320, "red", 30, 20);
 
     //GYM//
-    gym2 = new Object(220,630,"transparent",160,20);
-    gym3 = new Object(220,630,"transparent",160,20);
+    gym2 = new Object(220,630,"red",160,20);
 
 
     const runGame = setInterval(gameLoop, 120);
@@ -87,21 +89,21 @@ function movementHandler(e) {
 
     switch (e.key) {
         case "w":
-            dude1.y -= 20;
+            dude1.y -= 10;
             break
 
 
         case "s":
-            dude1.y += 20;
+            dude1.y += 10;
             break
 
         case "a":
-            dude1.x -= 20;
+            dude1.x -= 10;
             break
 
 
         case "d":
-            dude1.x += 20;
+            dude1.x += 10;
             break
 
     }
@@ -115,43 +117,55 @@ document.addEventListener("keydown", movementHandler)
 
 function gameLoop() {
     inside1C.clearRect(0, 0, inside.width, inside.height);
-
+    
 
     if (door1.alive) {
         door1.render();
+        let doors = doorAlive();
         let hit = nextRoom(dude1, door1);
 
-    } if (door1.alive === false && door2.alive) {
+    } if (door2.alive) {
         door2.render();
         let hit = goOutside(dude1, door2);
+
+    } if (door3.alive){    
         door3.render();
-        let hit2 = previousRoom(dude1, door3);
+        let hit = previousRoom(dude1, door3);
 
-    } if (door2.alive === false && door4.alive && cave.alive) {
+    } if (door4.alive) {
         door4.render();
-        cave.render(); 
         let hit = previousRoom2(dude1, door4);
-        let hit2 = enterCave(dude1, cave);
-        
-    } if (door2.alive===false && grass.alive){
+          
+    } if (cave.alive) {
+        cave.render(); 
+        let hit = enterCave(dude1, cave);
+ 
+    } if (grass.alive){
         grass.render();
-        let hit3 = grassFight(dude1,grass);
+        let hit = grassFight(dude1,grass);
 
-    } if (cave.alive === false && cave2.alive && cave3.alive) {
+    } if (pokeCenter.alive){
+        pokeCenter.render();
+        let hit = healPokemon(dude1,pokeCenter);
+
+    } if (cave2.alive) {
         cave2.render();
-        cave3.render();
         let hit = previousRoom3(dude1, cave2);
-        let hit2 = leaveCave(dude1, cave3);
 
-    } if (cave3.alive === false && cave4.alive && gym.alive) {
+    } if (cave3.alive) {
+        cave3.render();
+        let hit = leaveCave(dude1, cave3);
+
+    } if (cave4.alive) {
         cave4.render();
-        gym.render();
         let hit = previousRoom4(dude1, cave4);
-        let hit2 = enterGym(dude1,gym);
+
+    } if (gym.alive) {
+        gym.render();
+        let hit = enterGym(dude1,gym);
     
-    }if (gym.alive === false && gym2.alive && gym3.alive) {
+    }if (gym2.alive) {
         gym2.render();
-        gym3.render();
         let hit = previousRoom5(dude1,gym2);
 
 
@@ -164,6 +178,56 @@ function gameLoop() {
 
 }
 
+function healPokemon(p1,p2){
+    let enterRoom =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (enterRoom) {
+        return pokeHealed();
+
+
+
+    } else {
+        return false;
+    }
+
+    console.log("fight started");
+
+
+}
+
+function pokeHealed(){
+    let health = Number(pHealth.textContent);
+    let newHealth = 100;
+    pHealth.textContent = newHealth;
+    alert("Your Pokemon Were Healed!");
+
+}
+
+//function to start all doors dead//
+function doorAlive(){
+door1.alive = true;
+door2.alive = false;
+door3.alive = false;
+grass.alive = false;
+door4.alive = false;
+cave.alive = false;
+pokeCenter.alive = false;
+cave2.alive = false;
+cave3.alive = false;
+cave4.alive = false;
+gym.alive = false;
+gym2.alive = false;
+
+    
+}
+
+
+//FIRST ROOM TO SECOND ROOM//
 function nextRoom(p1, p2) {
 
     let enterRoom =
@@ -190,8 +254,19 @@ function nextRoom(p1, p2) {
 
 function hideRoom() {
     door1.alive = false;
-    door2.alive = true;
-    door3.alive = true;
+            door2.alive = true;
+            door3.alive = true;
+    grass.alive = false;
+    door4.alive = false;
+    cave.alive = false;
+    pokeCenter.alive = false;
+    cave2.alive = false;
+    cave3.alive = false;
+    cave4.alive = false;
+    gym.alive = false;
+    gym2.alive = false;
+    
+
     let roomTrans = document.querySelector('#inside');
     roomTrans.setAttribute("id", "inside2");
     dude1.x = 370;
@@ -200,7 +275,7 @@ function hideRoom() {
 
 
 }
-
+//LEAVE HOUSE//
 function goOutside(p1, p2) {
 
     let goOut =
@@ -228,10 +303,19 @@ function goOutside(p1, p2) {
 }
 
 function leaveHouse() {
+    door1.alive = false;
     door2.alive = false;
     door3.alive = false;
+    grass.alive = true;
     door4.alive = true;
     cave.alive = true;
+    pokeCenter.alive = true;
+    cave2.alive = false;
+    cave3.alive = false;
+    cave4.alive = false;
+    gym.alive = false;
+    gym2.alive = false;
+    
 
     let roomTrans = document.querySelector('#inside2');
     roomTrans.setAttribute("id", "outside");
@@ -241,7 +325,7 @@ function leaveHouse() {
 
 
 }
-
+//SECOND ROOM TO FIRST ROOM//
 function previousRoom(p1, p2) {
 
     let goBack =
@@ -267,12 +351,21 @@ function previousRoom(p1, p2) {
 }
 
 function lastRoom() {
-    door3.alive = false;
-    door2.alive = false;
     door1.alive = true;
+    door2.alive = false;
+    door3.alive = false;
+    grass.alive = false;
     door4.alive = false;
     cave.alive = false;
+    pokeCenter.alive = false;
     cave2.alive = false;
+    cave3.alive = false;
+    cave4.alive = false;
+    gym.alive = false;
+    gym2.alive = false;
+    
+
+
     let roomTrans = document.querySelector('#inside2');
     roomTrans.setAttribute("id", "inside");
     dude1.x = 0;
@@ -281,7 +374,7 @@ function lastRoom() {
 
 
 }
-
+//GO BACK INSIDE HOUSE FROM OUTSIDE//
 function previousRoom2(p1, p2) {
 
     let goBack =
@@ -307,11 +400,19 @@ function previousRoom2(p1, p2) {
 }
 
 function lastRoom2() {
-    door4.alive = false;
+    door1.alive = false;
     door2.alive = true;
     door3.alive = true;
+    grass.alive = false;
+    door4.alive = false;
     cave.alive = false;
+    pokeCenter.alive = false;
     cave2.alive = false;
+    cave3.alive = false;
+    cave4.alive = false;
+    gym.alive = false;
+    gym2.alive = false;
+    
 
     let roomTrans2 = document.querySelector('#outside');
     roomTrans2.setAttribute('id', "inside2");
@@ -321,7 +422,7 @@ function lastRoom2() {
 
 
 }
-
+//GO FROM OUTSIDE TO CAVE
 function enterCave(p1, p2) {
 
     let goInCave =
@@ -347,10 +448,19 @@ function enterCave(p1, p2) {
 }
 
 function insideCave() {
-    cave.alive = false;
-    door3.alive = false;
-    cave2.alive = true;
-    cave3.alive = true;
+door1.alive = false;
+door2.alive = false;
+door3.alive = false;
+grass.alive = false;
+door4.alive = false;
+cave.alive = false;
+pokeCenter.alive = false;
+cave2.alive = true;
+cave3.alive = true;
+cave4.alive = false;
+gym.alive = false;
+gym2.alive = false;
+
     
    
     let caveTrans = document.querySelector('#outside');
@@ -362,7 +472,7 @@ function insideCave() {
 
 
 }
-
+//GO FROM INSIDE CAVE TO FISRT OUTSIDE//
 function previousRoom3(p1, p2) {
 
     let goBack2 =
@@ -388,10 +498,19 @@ function previousRoom3(p1, p2) {
 }
 
 function lastRoom3() {
-    cave2.alive = false;
-    cave3.alive = false;
-    cave.alive = true;
-    door4.alive = true;
+door1.alive = false;
+door2.alive = false;
+door3.alive = false;
+grass.alive = false;
+door4.alive = true;
+cave.alive = true;
+pokeCenter.alive = true;
+cave2.alive = false;
+cave3.alive = false;
+cave4.alive = false;
+gym.alive = false;
+gym2.alive = false;
+
 
     let roomTrans3 = document.querySelector('#cave');
     roomTrans3.setAttribute("id", "outside");
@@ -423,18 +542,26 @@ function leaveCave(p1, p2) {
 
 
 }
-
+//GO FROM CAVE TO OUTSIDE 2//
 function outsideCave() {
-    cave3.alive = false;
-    cave2.alive = false;
-    gym.alive = true;
-    cave4.alive = true;
-    let caveTrans2 = document.querySelector('#cave');
-    caveTrans2.setAttribute("id", "outside2");
-    dude1.x = 450;
-    dude1.y = 130;
+door1.alive = false;
+door2.alive = false;
+door3.alive = false;
+grass.alive = false;
+door4.alive = false;
+cave.alive = false;
+pokeCenter.alive = false;
+cave2.alive = false;
+cave3.alive = false;
+cave4.alive = true;
+gym.alive = true;
+gym2.alive = false;
+
 
 }
+
+
+//GO FROM OUTSIDE 2 BACK INTO CAVE//
 function previousRoom4(p1, p2) {
 
     let goBack =
@@ -460,13 +587,19 @@ function previousRoom4(p1, p2) {
 }
 
 function lastRoom4() {
-    cave2.alive = true;
-    cave3.alive = true;
-    cave4.alive = false;
-   
-    
-    cave.alive = false;
-    door4.alive = false;
+door1.alive = false;
+door2.alive = false;
+door3.alive = false;
+grass.alive = false;
+door4.alive = false;
+cave.alive = false;
+pokeCenter.alive = false;
+cave2.alive = true;
+cave3.alive = true;
+cave4.alive = false;
+gym.alive = false;
+gym2.alive = false;
+
 
     let roomTrans3 = document.querySelector('#outside2');
     roomTrans3.setAttribute("id", "cave");
@@ -475,6 +608,7 @@ function lastRoom4() {
 
 }
 
+//GO FROM OUTSIDE2 INTO GYM//
 function enterGym(p1, p2) {
 
     let goBack =
@@ -501,12 +635,19 @@ function enterGym(p1, p2) {
 
 function inGym() {
     
-    cave4.alive = false;
-    cave.alive = false;
-    door4.alive = false;
-    gym.alive = false;
-    gym2.alive = true;
-    gym3.alive = true;
+door1.alive = false;
+door2.alive = false;
+door3.alive = false;
+grass.alive = false;
+door4.alive = false;
+cave.alive = false;
+pokeCenter.alive = false;
+cave2.alive = false;
+cave3.alive = false;
+cave4.alive = false;
+gym.alive = false;
+gym2.alive = true;
+
     
 
     let roomTrans3 = document.querySelector('#outside2');
@@ -516,6 +657,7 @@ function inGym() {
 
 }
 
+//GO FROM INSIDE GYM TO OUTSIDE 2//
 function previousRoom5(p1, p2) {
 
     let goBack =
@@ -541,10 +683,20 @@ function previousRoom5(p1, p2) {
 }
 
 function lastRoom5() {
-    gym.alive = true;
-    cave4.alive = true;
-    gym2.alive = false;
-    gym3.alive = false;
+
+door1.alive = false;
+door2.alive = false;
+door3.alive = false;
+grass.alive = false;
+door4.alive = false;
+cave.alive = false;
+pokeCenter.alive = false;
+cave2.alive = false;
+cave3.alive = false;
+cave4.alive = true;
+gym.alive = true;
+gym2.alive = false;
+
 
     let roomTrans4 = document.querySelector('#gym');
     roomTrans4.setAttribute("id", "outside2");
