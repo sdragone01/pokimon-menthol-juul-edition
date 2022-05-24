@@ -25,7 +25,7 @@ let caveFight;
 
 let cave4;
 let gym;
-let pokeCenter2;
+
 
 //GYM//
 
@@ -76,7 +76,7 @@ window.addEventListener("DOMContentLoaded", function (e) {
     //OUTSIDE2//
     cave4 = new Object(450, 90, "red", 30, 20);
     gym = new Object(130, 320, "red", 30, 20);
-    pokeCenter2 = new Object(130, 320, "red", 30, 20);
+   
 
     //GYM//
     gym2 = new Object(220,630,"red",160,20);
@@ -97,21 +97,21 @@ function movementHandler(e) {
 
     switch (e.key) {
         case "w":
-            dude1.y -= 10;
+            dude1.y -= 20;
             break
 
 
         case "s":
-            dude1.y += 10;
+            dude1.y += 20;
             break
 
         case "a":
-            dude1.x -= 10;
+            dude1.x -= 20;
             break
 
 
         case "d":
-            dude1.x += 10;
+            dude1.x += 20;
             break
 
     }
@@ -155,9 +155,7 @@ function gameLoop() {
         pokeCenter.render();
         let hit = healPokemon(dude1,pokeCenter);
     
-    } if (pokeCenter2.alive){
-        pokeCenter2.render();
-        let hit = healPokemon(dude1,pokeCenter2);
+    
 
     } if (cave2.alive) {
         cave2.render();
@@ -231,6 +229,37 @@ function pokeHealed(){
     dude1.y = 510;
 
 }
+function healPokemon2(p1,p2){
+    let enterRoom =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (enterRoom) {
+        return pokeHealed2();
+
+
+
+    } else {
+        return false;
+    }
+
+    console.log("fight started");
+
+
+}
+
+function pokeHealed2(){
+    let health = Number(pHealth.textContent);
+    let newHealth = 100;
+    pHealth.textContent = newHealth;
+    alert("Your Pokemon Were Healed!");
+    dude1.x = 380;
+    dude1.y = 480;
+
+}
 
 //function to start all doors dead//
 function doorAlive(){
@@ -246,6 +275,7 @@ cave3.alive = false;
 caveFight.alive = false;
 cave4.alive = false;
 gym.alive = false;
+pokeC= false;
 gym2.alive = false;
 gymFight.alive=false;
 
@@ -291,6 +321,7 @@ function hideRoom() {
     caveFight.alive = false;
     cave4.alive = false;
     gym.alive = false;
+    pokeC= false;
     gym2.alive = false;
     gymFight.alive=false;
     
@@ -343,6 +374,7 @@ function leaveHouse() {
     caveFight.alive = false;
     cave4.alive = false;
     gym.alive = false;
+    pokeC= false;
     gym2.alive = false;
     gymFight.alive=false;
     
@@ -393,6 +425,7 @@ function lastRoom() {
     caveFight.alive = false;
     cave4.alive = false;
     gym.alive = false;
+    pokeC= false;
     gym2.alive = false;
     gymFight.alive=false;
     
@@ -444,6 +477,7 @@ function lastRoom2() {
     caveFight.alive = false;
     cave4.alive = false;
     gym.alive = false;
+    pokeC= false;
     gym2.alive = false;
     gymFight.alive=false;
     
@@ -494,6 +528,7 @@ cave3.alive = true;
 caveFight.alive = true;
 cave4.alive = false;
 gym.alive = false;
+pokeC= false;
 gym2.alive = false;
 gymFight.alive=false;
 
@@ -546,6 +581,7 @@ cave3.alive = false;
 caveFight.alive = false;
 cave4.alive = false;
 gym.alive = false;
+pokeC= false;
 gym2.alive = false;
 gymFight.alive=false;
 
@@ -594,6 +630,7 @@ cave3.alive = false;
 caveFight.alive = false;
 cave4.alive = true;
 gym.alive = true;
+pokeC = true;
 gym2.alive = false;
 gymFight.alive=false;
 
@@ -601,6 +638,8 @@ let roomTrans3 = document.querySelector('#cave');
 roomTrans3.setAttribute("id", "outside2");
 dude1.x = 450;
 dude1.y = 120;
+
+console.log(pokeC);
 
 }
 
@@ -643,6 +682,7 @@ cave3.alive = true;
 caveFight.alive = false;
 cave4.alive = false;
 gym.alive = false;
+pokeC= false;
 gym2.alive = false;
 gymFight.alive=false;
 
@@ -693,10 +733,16 @@ cave3.alive = false;
 caveFight.alive = false;
 cave4.alive = false;
 gym.alive = false;
+pokeC= false;
 gym2.alive = true;
 gymFight.alive=true;
 
     
+let health = Number(pHealth.textContent);
+let newHealth = 100;
+pHealth.textContent = newHealth;
+alert("Your Pokemon Were Healed!");
+
 
     let roomTrans3 = document.querySelector('#outside2');
     roomTrans3.setAttribute("id", "gym");
@@ -744,6 +790,7 @@ cave3.alive = false;
 caveFight.alive = false;
 cave4.alive = true;
 gym.alive = true;
+pokeC= true;
 gym2.alive = false;
 gymFight.alive=false;
 
@@ -854,6 +901,8 @@ function attack3(){
         gymFight.alive=false;
         let fightScreen1 = document.querySelector(".fight");
         fightScreen1.setAttribute("id","fightSequenceHide");
+        let winScreen = document.querySelector('.youwin');
+        winScreen.setAttribute('id','youwin');
         c3Health.textContent = 100;
         dude1.render();
         
@@ -905,7 +954,7 @@ function attack3(){
         },5000);
        
     }
-    // cave fight //
+    // gym fight //
     function returnAttack3 (){
         setTimeout(function(){
             let attackPoints = Number(pHealth.textContent);
