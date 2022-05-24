@@ -61,6 +61,7 @@ window.addEventListener("DOMContentLoaded", function (e) {
     //OUTSIDE//
     door4 = new Object(130, 220, "transparent", 40, 20);
     cave = new Object(450, 90, "transparent", 30, 20);
+    grass = new Object(330,260 ,"red",180,20 );
 
     //CAVE//
     cave2 = new Object(430, 0, "transparent", 80, 20);
@@ -132,9 +133,13 @@ function gameLoop() {
     } if (door2.alive === false && door4.alive && cave.alive) {
         door4.render();
         cave.render();
+        
         let hit = previousRoom2(dude1, door4);
         let hit2 = enterCave(dude1, cave);
-
+        
+    } if (door2.alive===false && grass.alive){
+        grass.render();
+        let hit3 = grassFight(dude1,grass);
     } if (cave.alive === false && cave2.alive && cave3.alive) {
         cave2.render();
         cave3.render();
@@ -548,6 +553,117 @@ function lastRoom5() {
     roomTrans4.setAttribute("id", "outside2");
     dude1.x = 130;
     dude1.y = 350;
+
+}
+
+
+
+let pHealth = document.querySelector('#pHealthNum');
+let cHealth = document.querySelector('#cHealthNum');
+let attackBtn = document.querySelector('#attack1');
+let healBtn = document.querySelector('#heal');
+let fightScreen1 = document.querySelector('.fightSequence');
+
+const arr = [20,20,20,20];
+const arr2 = [20,10,10,10,5,5,5,0,0];
+
+function attack(){
+
+    let attackPoints = Number(cHealth.textContent);
+    let randomArr = arr[Math.floor(Math.random()*arr.length)];
+    let newHealth = attackPoints - randomArr;
+    cHealth.textContent = newHealth;
+     
+    if (randomArr === 20) {
+        alert("Charmander used Fireball- It was very effective!");
+    }else if (randomArr === 10) {
+        alert("Charmander used Fireball- It was effective!");
+    }else if (randomArr === 5) {
+        alert("Charmander used Fireball- It wasn't very effective!");
+    } else {
+        alert("Charmander used Fireball- It was a miss!");
+    }
+    if (newHealth <= 0 ){
+        grass.alive=false;
+        let fightScreen1 = document.querySelector(".fight");
+        fightScreen1.setAttribute("id","fightSequenceHide");
+        dude1.render();
+        
+        
+    }
+          
+    }
+
+    function returnAttack (){
+        setTimeout(function(){
+            let attackPoints = Number(pHealth.textContent);
+            let randomArr = arr2[Math.floor(Math.random()*arr.length)];
+            let newHealth = attackPoints - randomArr;
+            pHealth.textContent = newHealth;
+            
+            if (randomArr === 20) {
+                alert("Growlthie used SCRATCH - It was very effective!");
+            }else if (randomArr === 10) {
+                alert("Growlthie used SCRATCH - It was effective!");
+            }else if (randomArr === 5) {
+                alert("Growlthie used SCRATCH - It wasn't very effective!");
+            } else {
+                alert("Growlthie used SCRATCH - It was a miss!");
+            }
+            console.log(newHealth);
+        },5000);
+       
+    }
+
+
+
+function heal(){
+
+
+
+
+    let healPoints = Number(pHealth.textContent);
+    let newHealth2 = healPoints + 20;
+    pHealth.textContent = newHealth2;
+   
+    
+    if (newHealth === 0){
+        
+        
+    }
+
+}
+   
+function grassFight(p1, p2) {
+
+    let fight =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (fight) {
+        return startFight1();
+
+
+
+    } else {
+        return false;
+    }
+
+
+
+
+
+}
+
+function startFight1() {
+    
+
+    let fightBoard = document.querySelector('.fight');
+    fightBoard.setAttribute("id", "fightSequence");
+    
 
 }
 

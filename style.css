@@ -3,6 +3,173 @@
 div{
     position: relative;
 }
+#fightSequenceHide {
+    display: none;
+   
+}
+#fightSequence{
+    
+}
+
+#buttonBlock{
+    background-size: contain;
+    position: absolute;
+    background-color: aliceblue;
+    width: 580px;
+    height: 150px;
+    margin-left: 20px;
+    border: 5px solid black;
+    border-radius: 5px solid black;
+    margin-top: 460px;
+    z-index: 14;
+}
+#playerHealth{
+    background-size: contain;
+    position: absolute;
+    background-color: aliceblue;
+    width: 250px;
+    height: 50px;
+    margin-top: 330px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+   text-align: left;
+   padding-left: 15px;
+   padding-top: 20px;
+    opacity: .6;
+    border-bottom: 5px solid black;
+    border-right: 5px solid black;
+    margin-left: 340px;
+    z-index: 15;
+}
+#pHealthNum{
+    background-size: contain;
+    position: absolute;
+    
+    margin-top: 350px;
+  
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+
+    opacity: .6;
+    margin-left: 460px;
+    z-index: 15;
+}
+
+#computerHealth{
+    background-size: contain;
+    position: absolute;
+    background-color: aliceblue;
+    width: 250px;
+    height: 50px;
+    margin-top: 50px;
+   margin-left: 30px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+   text-align: left;
+   padding-left: 20px;
+   padding-top: 20px;
+    opacity: .6;
+    border-bottom: 5px solid black;
+    border-left: 5px solid black;
+    z-index: 15;
+}
+#cHealthNum{
+    background-size: contain;
+    position: absolute;
+ 
+  
+    margin-top: 70px;
+   margin-left: 150px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+   text-align: left;
+    opacity: .6;
+    z-index: 15;
+}
+
+#attack1{
+    background-size: contain;
+    position: absolute;
+    width: 280px;
+    height: 140px;
+    z-index: 16;
+    font-family: 'Press Start 2P', cursive;
+    margin-top: 470px;
+    margin-left: 30px;
+    font-size: larger;
+
+
+}
+#heal{
+    background-size: contain;
+    position: absolute;
+    width: 280px;
+    height: 140px;
+    z-index: 16;
+    font-family: 'Press Start 2P', cursive;
+    margin-top: 470px;
+    margin-left: 320px;
+    font-size: larger;
+
+
+}
+
+
+#text1{
+    background-size: contain;
+    position: absolute;
+    width: 640;
+    height: 640;
+    z-index: 13;
+
+}
+.text1hide{
+    display:none;
+
+}
+#charmander{
+    background-size: contain;
+    position: absolute;
+    width: 640;
+    height: 640;
+    margin-left: 120px;
+    margin-top: 200px;
+    top: 0;
+    transform: scale(1);
+    z-index: 11;
+    
+}
+
+
+#comp1{
+    background-size: contain;
+    position: absolute;
+    width: 640;
+    height: 640;
+    margin-left: 260px;
+    margin-top: -30px;
+    top: 0;
+    transform: scale(.3);
+    z-index: 11;
+    
+}
+
+
+
+#fight{
+    background: url(./Assets/fight\ screen.png);
+    background-size: contain;
+    position: absolute;
+    width: 640;
+    height: 640;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+
+.fightHide{
+    display: none;
+}
 
 #inside{
     background: url(./Assets/inside2.png);

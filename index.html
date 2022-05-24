@@ -6,11 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Sals Game</title>
-  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+  <div class="fight"id="fightSequenceHide" >
+    <div id="buttonBlock"></div>
+    <div id="playerHealth"> HP:</div>
+    <h1 id="pHealthNum">100</h1>
+    <div id="computerHealth">HP:</div>
+    <h1 id="cHealthNum">100</h1>
+    <button id="attack1" onclick="attack(),returnAttack()">Fire Ball</button>
+    <button id="heal" onclick="heal(),returnAttack()">Take Potion</button>
+
+    <img src="./Assets//wild growthie text.png" class="text1hide" id="text1">
+    <img id="comp1" src="./Assets/tumblr_mkuqqsTeWn1r67h3uo1_500.gif" alt="">
+    <img src="./Assets/VagueTallHydra-max-1mb.gif" alt="" id="charmander">
+  <img id="fight" src="./Assets/fight back 2.png">
+
+</div>
 
 
   <div>
@@ -22,6 +41,7 @@
 
  
   <script src="./Java/app.js" async defer></script>
+  
 
 
 </body>
