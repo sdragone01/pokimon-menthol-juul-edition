@@ -19,6 +19,18 @@ div{
     
 }
 
+#machopHide{
+    display:none;
+}
+
+#growlthieHide{
+    display: none;
+}
+
+#articunoHide{
+    display: none;
+}
+
 #buttonBlock{
     background-size: contain;
     position: absolute;
@@ -50,6 +62,19 @@ div{
     z-index: 15;
 }
 #pHealthNum{
+    background-size: contain;
+    position: absolute;
+    
+    margin-top: 350px;
+  
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+
+    opacity: .6;
+    margin-left: 460px;
+    z-index: 15;
+}
+#pHealthNum2{
     background-size: contain;
     position: absolute;
     
@@ -107,8 +132,47 @@ div{
     opacity: .6;
     z-index: 15;
 }
+#c3HealthNum{
+    background-size: contain;
+    position: absolute;
+ 
+  
+    margin-top: 70px;
+   margin-left: 150px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+   text-align: left;
+    opacity: .6;
+    z-index: 15;
+}
 
 #attack1{
+    background-size: contain;
+    position: absolute;
+    width: 280px;
+    height: 140px;
+    z-index: 16;
+    font-family: 'Press Start 2P', cursive;
+    margin-top: 470px;
+    margin-left: 30px;
+    font-size: larger;
+
+
+}
+#attack2{
+    background-size: contain;
+    position: absolute;
+    width: 280px;
+    height: 140px;
+    z-index: 16;
+    font-family: 'Press Start 2P', cursive;
+    margin-top: 470px;
+    margin-left: 30px;
+    font-size: larger;
+
+
+}
+#attack3{
     background-size: contain;
     position: absolute;
     width: 280px;
@@ -172,6 +236,30 @@ div{
     top: 0;
     transform: scale(.3);
     z-index: 11;
+    
+}
+#comp2{
+    background-size: contain;
+    position: absolute;
+    width: 640;
+    height: 640;
+    margin-left: 300px;
+    margin-top: -30px;
+    top: 0;
+    transform: scale(.3);
+    z-index: 11;
+    
+}
+#comp3{
+    background-size: contain;
+    position: absolute;
+    width: 640;
+    height: 640;
+    margin-left: 400px;
+    margin-top: 40px;
+    top: 0;
+    transform: scale(.8);
+    z-index: 13;
     
 }
 
