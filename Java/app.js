@@ -121,9 +121,6 @@ function gameLoop() {
         door1.render();
         let hit = nextRoom(dude1, door1);
 
-
-
-
     } if (door1.alive === false && door2.alive) {
         door2.render();
         let hit = goOutside(dude1, door2);
@@ -132,14 +129,14 @@ function gameLoop() {
 
     } if (door2.alive === false && door4.alive && cave.alive) {
         door4.render();
-        cave.render();
-        
+        cave.render(); 
         let hit = previousRoom2(dude1, door4);
         let hit2 = enterCave(dude1, cave);
         
     } if (door2.alive===false && grass.alive){
         grass.render();
         let hit3 = grassFight(dude1,grass);
+
     } if (cave.alive === false && cave2.alive && cave3.alive) {
         cave2.render();
         cave3.render();
