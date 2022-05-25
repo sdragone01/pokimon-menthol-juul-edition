@@ -105,6 +105,9 @@ const room1Arr = [
 
 
 
+
+
+
 class Object {
     constructor(x, y, color, width, height) {
         this.x = x;
