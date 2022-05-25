@@ -7,49 +7,42 @@ const fightMp3 = document.querySelector('#fightM');
 
 
 
-const dude2 = new Image();
+// const dude2 = new Image();
 
-dude2.src = './Assets/again3.png';
-dude2.onload = loadImages;
-let cols = 4;
-let rows = 4;
-let spriteWidth = dude2.width/cols;
-let spriteHeight = dude2.height/rows;
-let totalFrames =4 ;
-let currentFrame = 0;
-let srcX = 0;
-let srcY = 0;
-let framesDrawn =0;
-let dudeHor = 430;
-let dudeVert =200;
+// dude2.src = './Assets/again3.png';
+// dude2.onload = loadImages;
+// let cols = 4;
+// let rows = 4;
+// let spriteWidth = dude2.width/cols;
+// let spriteHeight = dude2.height/rows;
+// let totalFrames =4 ;
+// let currentFrame = 0;
+// let srcX = 0;
+// let srcY = 0;
+// let framesDrawn =0;
+// let dudeHor = 430;
+// let dudeVert =200;
 
 
 
-function animate(){
-    inside1C.clearRect(0,0,inside.width,inside.height);
-    requestAnimationFrame(animate);
-    currentFrame = currentFrame % totalFrames;
-    srcX = currentFrame * spriteWidth;
+// function animate(){
+//     inside1C.clearRect(0,0,inside.width,inside.height);
+//     requestAnimationFrame(animate);
+//     currentFrame = currentFrame % totalFrames;
+//     srcX = currentFrame * spriteWidth;
 
-    inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
-    inside1C.restore();
+//     inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
+//     inside1C.restore();
  
-}
-animate();
-
-let numOfImages = 4;
-function loadImages(){
-    if(--numOfImages>0) return;
-    animate();
-}
-
-// function resizeImage(){
-//     let scaleFactor = .5;
-//     let midXPos = innerWidth/2 -(spriteWidth * scaleFactor)/2;
-//     let midYPos = innerHeight/2 -(spriteHeight * scaleFactor)/2;
-//     inside1C.translate(midXPos,midYPos);
-//     inside1C.scale(scaleFactor,scaleFactor);
 // }
+// animate();
+
+// let numOfImages = 4;
+// function loadImages(){
+//     if(--numOfImages>0) return;
+//     animate();
+// }
+
 
 
 //FIRST ROOM//
@@ -83,6 +76,19 @@ let gym;
 let gym2;
 let gymFight;
 
+//boundaries//
+
+let b1;
+let b2;
+let b3;
+let b4;
+let b5;
+let b6;
+let b7;
+let b8;
+let b9;
+let b10;
+
 
 
 class Object {
@@ -93,6 +99,7 @@ class Object {
         this.width = width;
         this.height = height;
         this.alive = true;
+        
     }
     render() {
         inside1C.fillStyle = this.color;
@@ -104,7 +111,7 @@ class Object {
 }
 
     //FIRST ROOM//
-    dude1 = new Object(430, 200, "red", 30, 20);
+    dude1 = new Object(430, 200, "red", 20, 20);
     door1 = new Object(0, 320, "transparent", 30, 20);
 
     //SECOND ROOM//
@@ -132,6 +139,13 @@ class Object {
     gymFight = new Object(310,100,"transparent",20,20);
 
 
+    //Boundaries//
+
+    b1 = new Object(270,180,"red",350,10);
+    b2 = new Object(280,180,"red",10,140);
+    b3 = new Object(610,180,"red",10,140);
+
+
     setInterval(gameLoop, 80);
 
     
@@ -146,49 +160,49 @@ function movementHandler(e) {
     switch (e.key) {
         case "w":
             dude1.y -=10;
-            dudeVert -= 10;
-            srcY = 0* spriteHeight;
-            srcX = framesDrawn++;
-            if(framesDrawn >=0){
-                currentFrame ++;
-                framesDrawn =0;
-            }
+            // dudeVert -= 10;
+            // srcY = 0* spriteHeight;
+            // srcX = framesDrawn++;
+            // if(framesDrawn >=0){
+            //     currentFrame ++;
+            //     framesDrawn =0;
+            // }
             break
 
 
         case "s":
             dude1.y +=10;
-            dudeVert += 10;
-            srcY = 3 * spriteHeight;
-            srcX = framesDrawn++;
-            if(framesDrawn >=0){
-                currentFrame ++;
-                framesDrawn =0;
-            }
+            // dudeVert += 10;
+            // srcY = 3 * spriteHeight;
+            // srcX = framesDrawn++;
+            // if(framesDrawn >=0){
+            //     currentFrame ++;
+            //     framesDrawn =0;
+            // }
             break
 
         case "a":
             dude1.x -=10;
-            dudeHor -= 10;
-            srcY = 2* spriteHeight;
-            srcX = framesDrawn++;
-            if(framesDrawn >=0){
-                currentFrame ++;
-                framesDrawn =0;
-            }
+            // dudeHor -= 10;
+            // srcY = 2* spriteHeight;
+            // srcX = framesDrawn++;
+            // if(framesDrawn >=0){
+            //     currentFrame ++;
+            //     framesDrawn =0;
+            // }
             break
 
 
         case "d":
             dude1.x +=10;
-            dudeHor += 10;
-            srcY = 1 * spriteHeight;
-            srcX = framesDrawn++;
-            if(framesDrawn >=0){
-                currentFrame ++;
-                framesDrawn =0;
-            }
-            breaks
+            // dudeHor += 10;
+            // srcY = 1 * spriteHeight;
+            // srcX = framesDrawn++;
+            // if(framesDrawn >=0){
+            //     currentFrame ++;
+            //     framesDrawn =0;
+            // }
+            break
 
     }
    
@@ -204,16 +218,17 @@ document.addEventListener("keydown", movementHandler)
 
 document.querySelector('#mainM').play();
 
+
+
+
+
+
+
+
 function gameLoop() {
     inside1C.clearRect(0, 0, inside.width, inside.height);
-    // console.log(dude1);
-
-   
-
-
-
-
-
+    b1.render();
+    b2.render();
 
     dude1.render();
 
@@ -277,11 +292,6 @@ function gameLoop() {
 
 
     }
-
-
-
-
-
 
 }
 
@@ -926,8 +936,10 @@ let fightScreen1 = document.querySelector('.fightSequence');
 
 
 
-
+// player hit values//
 const arr = [20,20,20,20]; //player fight buttons
+
+//computer hit values//
 const arr2 = [20,10,10,10,5,5,5,0,0]; //comp1 fight buttons
 const arr3 = [20,10,10,10,5,5,5,0,0]; //comp2 fight buttons
 const arr4 = [20,20,10,10,5,5]; //comp2 fight buttons
