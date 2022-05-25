@@ -1,6 +1,57 @@
 let inside = document.querySelector("#inside");
 let inside1C = inside.getContext('2d');
 
+
+const mainMp3 = document.querySelector('#main');
+const fightMp3 = document.querySelector('#fightM');
+
+
+
+const dude2 = new Image();
+
+dude2.src = './Assets/again3.png';
+dude2.onload = loadImages;
+let cols = 4;
+let rows = 4;
+let spriteWidth = dude2.width/cols;
+let spriteHeight = dude2.height/rows;
+let totalFrames =4 ;
+let currentFrame = 0;
+let srcX = 0;
+let srcY = 0;
+let framesDrawn =0;
+let dudeHor = 430;
+let dudeVert =200;
+
+
+
+function animate(){
+    inside1C.clearRect(0,0,inside.width,inside.height);
+    requestAnimationFrame(animate);
+    currentFrame = currentFrame % totalFrames;
+    srcX = currentFrame * spriteWidth;
+
+    inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
+    inside1C.restore();
+ 
+}
+animate();
+
+let numOfImages = 4;
+function loadImages(){
+    if(--numOfImages>0) return;
+    animate();
+}
+
+// function resizeImage(){
+//     let scaleFactor = .5;
+//     let midXPos = innerWidth/2 -(spriteWidth * scaleFactor)/2;
+//     let midYPos = innerHeight/2 -(spriteHeight * scaleFactor)/2;
+//     inside1C.translate(midXPos,midYPos);
+//     inside1C.scale(scaleFactor,scaleFactor);
+// }
+
+
 //FIRST ROOM//
 let dude1;
 let door1;
@@ -34,7 +85,6 @@ let gymFight;
 
 
 
-
 class Object {
     constructor(x, y, color, width, height) {
         this.x = x;
@@ -53,41 +103,39 @@ class Object {
 
 }
 
-window.addEventListener("DOMContentLoaded", function (e) {
     //FIRST ROOM//
-    dude1 = new Object(430, 200, "black", 20, 20);
-    door1 = new Object(0, 320, "red", 30, 20);
+    dude1 = new Object(430, 200, "red", 30, 20);
+    door1 = new Object(0, 320, "transparent", 30, 20);
 
     //SECOND ROOM//
-    door2 = new Object(170, 620, "red", 40, 20);
-    door3 = new Object(360, 260, "red", 40, 20);
+    door2 = new Object(170, 620, "transparent", 40, 20);
+    door3 = new Object(360, 260, "transparent", 40, 20);
 
     //OUTSIDE//
-    door4 = new Object(130, 220, "red", 40, 20);
-    cave = new Object(450, 90, "red", 30, 20);
-    grass = new Object(330,260 ,"red",180,20 );
-    pokeCenter = new Object(320,480,"red",30,20);
+    door4 = new Object(130, 220, "transparent", 40, 20);
+    cave = new Object(450, 90, "transparent", 30, 20);
+    grass = new Object(330,260 ,"transparent",180,20 );
+    pokeCenter = new Object(320,480,"transparent",30,20);
 
     //CAVE//
-    cave2 = new Object(430, 0, "red", 80, 20);
-    cave3 = new Object(140, 400, "red", 80, 20);
-    caveFight = new Object(10,250,"red",610,20)
+    cave2 = new Object(430, 0, "transparent", 80, 20);
+    cave3 = new Object(140, 400, "transparent", 80, 20);
+    caveFight = new Object(10,250,"transparent",610,20)
 
     //OUTSIDE2//
-    cave4 = new Object(450, 90, "red", 30, 20);
-    gym = new Object(130, 320, "red", 30, 20);
+    cave4 = new Object(450, 90, "transparent", 30, 20);
+    gym = new Object(130, 320, "transparent", 30, 20);
    
 
     //GYM//
-    gym2 = new Object(220,630,"red",160,20);
-    gymFight = new Object(310,100,"red",20,20);
+    gym2 = new Object(220,630,"transparent",160,20);
+    gymFight = new Object(310,100,"transparent",20,20);
 
 
-    const runGame = setInterval(gameLoop, 80);
+    setInterval(gameLoop, 80);
 
     
 
-})
 
 
 
@@ -97,34 +145,77 @@ function movementHandler(e) {
 
     switch (e.key) {
         case "w":
-            dude1.y -= 20;
+            dude1.y -=10;
+            dudeVert -= 10;
+            srcY = 0* spriteHeight;
+            srcX = framesDrawn++;
+            if(framesDrawn >=0){
+                currentFrame ++;
+                framesDrawn =0;
+            }
             break
 
 
         case "s":
-            dude1.y += 20;
+            dude1.y +=10;
+            dudeVert += 10;
+            srcY = 3 * spriteHeight;
+            srcX = framesDrawn++;
+            if(framesDrawn >=0){
+                currentFrame ++;
+                framesDrawn =0;
+            }
             break
 
         case "a":
-            dude1.x -= 20;
+            dude1.x -=10;
+            dudeHor -= 10;
+            srcY = 2* spriteHeight;
+            srcX = framesDrawn++;
+            if(framesDrawn >=0){
+                currentFrame ++;
+                framesDrawn =0;
+            }
             break
 
 
         case "d":
-            dude1.x += 20;
-            break
+            dude1.x +=10;
+            dudeHor += 10;
+            srcY = 1 * spriteHeight;
+            srcX = framesDrawn++;
+            if(framesDrawn >=0){
+                currentFrame ++;
+                framesDrawn =0;
+            }
+            breaks
 
     }
-    console.log(dude1);
    
+   console.log(dude1);
+   console.log(dudeHor);
+   console.log(dudeVert)
 
 }
+
 
 document.addEventListener("keydown", movementHandler)
 
 
+document.querySelector('#mainM').play();
+
 function gameLoop() {
     inside1C.clearRect(0, 0, inside.width, inside.height);
+    // console.log(dude1);
+
+   
+
+
+
+
+
+
+    dude1.render();
 
     if (door1.alive) {
         door1.render();
@@ -154,8 +245,6 @@ function gameLoop() {
     } if (pokeCenter.alive){
         pokeCenter.render();
         let hit = healPokemon(dude1,pokeCenter);
-    
-    
 
     } if (cave2.alive) {
         cave2.render();
@@ -191,7 +280,6 @@ function gameLoop() {
 
 
 
-    dude1.render();
 
 
 
@@ -226,7 +314,9 @@ function pokeHealed(){
     pHealth.textContent = newHealth;
     alert("Your Pokemon Were Healed!");
     dude1.x = 320;
-    dude1.y = 510;
+    dude1.y = 520;
+    dudeHor = 320;
+    dudeVert = 510;
 
 }
 function healPokemon2(p1,p2){
@@ -257,7 +347,10 @@ function pokeHealed2(){
     pHealth.textContent = newHealth;
     alert("Your Pokemon Were Healed!");
     dude1.x = 380;
-    dude1.y = 480;
+    dude1.y = 490;
+    dudeHor = 380;
+    dudeVert = 480;
+
 
 }
 
@@ -329,7 +422,9 @@ function hideRoom() {
     let roomTrans = document.querySelector('#inside');
     roomTrans.setAttribute("id", "inside2");
     dude1.x = 370;
-    dude1.y = 320;
+    dude1.y = 330;
+    dudeHor = 370;
+    dudeVert = 320;
 
 
 
@@ -382,7 +477,9 @@ function leaveHouse() {
     let roomTrans = document.querySelector('#inside2');
     roomTrans.setAttribute("id", "outside");
     dude1.x = 130;
-    dude1.y = 260;
+    dude1.y = 270;
+    dudeHor = 130;
+    dudeVert = 260;
 
 
 
@@ -434,7 +531,9 @@ function lastRoom() {
     let roomTrans = document.querySelector('#inside2');
     roomTrans.setAttribute("id", "inside");
     dude1.x = 0;
-    dude1.y = 380;
+    dude1.y = 390;
+    dudeHor = 0;
+    dudeVert = 380;
 
 
 
@@ -486,7 +585,9 @@ function lastRoom2() {
     roomTrans2.setAttribute('id', "inside2");
 
     dude1.x = 170;
-    dude1.y = 580;
+    dude1.y = 590;
+    dudeHor = 170;
+    dudeVert = 580;
 
 
 }
@@ -537,7 +638,9 @@ gymFight.alive=false;
     let caveTrans = document.querySelector('#outside');
     caveTrans.setAttribute("id", "cave");
     dude1.x = 460;
-    dude1.y = 50;
+    dude1.y = 60;
+    dudeHor = 460;
+    dudeVert = 50;
 
 
 
@@ -589,7 +692,9 @@ gymFight.alive=false;
     let roomTrans3 = document.querySelector('#cave');
     roomTrans3.setAttribute("id", "outside");
     dude1.x = 450;
-    dude1.y = 130;
+    dude1.y = 140;
+    dudeHor = 450;
+    dudeVert = 130;
 
 }
 
@@ -637,9 +742,10 @@ gymFight.alive=false;
 let roomTrans3 = document.querySelector('#cave');
 roomTrans3.setAttribute("id", "outside2");
 dude1.x = 450;
-dude1.y = 120;
+dude1.y = 130;
+dudeHor = 450;
+dudeVert = 120;
 
-console.log(pokeC);
 
 }
 
@@ -690,7 +796,9 @@ gymFight.alive=false;
     let roomTrans3 = document.querySelector('#outside2');
     roomTrans3.setAttribute("id", "cave");
     dude1.x = 170;
-    dude1.y = 320;
+    dude1.y = 330;
+    dudeHor = 170;
+    dudeVert = 320;
 
 }
 
@@ -747,7 +855,9 @@ alert("Your Pokemon Were Healed!");
     let roomTrans3 = document.querySelector('#outside2');
     roomTrans3.setAttribute("id", "gym");
     dude1.x = 300;
-    dude1.y = 590;
+    dude1.y = 600;
+    dudeHor = 300;
+    dudeVert = 590;
 
 }
 
@@ -798,7 +908,9 @@ gymFight.alive=false;
     let roomTrans4 = document.querySelector('#gym');
     roomTrans4.setAttribute("id", "outside2");
     dude1.x = 130;
-    dude1.y = 350;
+    dude1.y = 360;
+    dudeHor = 130;
+    dudeVert = 350;
 
 }
 
@@ -843,6 +955,10 @@ function attack(){
         fightScreen1.setAttribute("id","fightSequenceHide");
         cHealth.textContent = 100;
         dude1.render();
+        inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
+        document.querySelector('#mainM').play();
+    document.querySelector('#fightM').pause();
+
         
         
     }
@@ -873,6 +989,7 @@ function attack2(){
         fightScreen1.setAttribute("id","fightSequenceHide");
         c2Health.textContent = 100;
         dude1.render();
+        inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
         
         
     }
@@ -904,7 +1021,10 @@ function attack3(){
         let winScreen = document.querySelector('.youwin');
         winScreen.setAttribute('id','youwin');
         c3Health.textContent = 100;
+        fightMusic.pause();
+        music.play();
         dude1.render();
+        inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
         
         
     }
@@ -929,7 +1049,7 @@ function attack3(){
                 alert("Growlthie used SCRATCH - It was a miss!");
             }
             console.log(newHealth);
-        },5000);
+        },3000);
        
     }
 
@@ -951,7 +1071,7 @@ function attack3(){
                 alert("Machop used Punch - It was a miss!");
             }
             console.log(newHealth);
-        },5000);
+        },3000);
        
     }
     // gym fight //
@@ -972,7 +1092,7 @@ function attack3(){
                 alert("Articuno used Punch - It was a miss!");
             }
             console.log(newHealth);
-        },5000);
+        },3000);
        
     }
 
@@ -996,7 +1116,7 @@ function heal(){
 }
    
 function grassFight(p1, p2) {
-
+   
     let fight =
 
         p1.y + p1.height > p2.y &&
@@ -1005,7 +1125,11 @@ function grassFight(p1, p2) {
         p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
 
     if (fight) {
+        
         return startFight1();
+        
+
+        
 
 
 
@@ -1020,7 +1144,9 @@ function grassFight(p1, p2) {
 }
 
 function startFight1() {
-    
+    document.querySelector('#mainM').pause();
+    document.querySelector('#fightM').play();
+        
 
     let fightBoard = document.querySelector('.fight');
     fightBoard.setAttribute("id", "fightSequence");
