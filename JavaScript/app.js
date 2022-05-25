@@ -203,6 +203,8 @@ const outside2Arr = [
 
 
 
+
+
 class Object {
     constructor(x, y, color, width, height) {
         this.x = x;
@@ -221,9 +223,10 @@ class Object {
 }
 
 
+//boundary class for creating x and y coordinate based on true or false value of array//
 
 class Boundary {
-    constructor({position}){
+    constructor({position}){ //position function to be called later//
         this.position = position;
         this.width = 32;
         this.height = 32;
@@ -234,20 +237,93 @@ class Boundary {
     }
 }
 
-const bounds = []
+//room one//
+const inside1B = [] //new array
 
-room1Arr.forEach((row,i) =>{
-    row.forEach((symbol,j) => {
-        if (symbol === 1)
-        bounds.push(new Boundary({
-            position: {
+room1Arr.forEach((row,i) =>{ //iterate and define row index//
+    row.forEach((symbol,j) => { // iterate and define index within current row//
+        if (symbol === 1)  // if row index contains 1 //
+        inside1B.push(new Boundary({ //create object from boundary class//
+            position: { // create coordinates from multiplying block width and height by its index location//
                 x: j * 32,
                 y: i * 32,
             }
         }))
     })
-})
-console.log(bounds);
+});
+
+
+//room two//
+const inside2B = []
+
+room2Arr.forEach((row,i) =>{ 
+    row.forEach((symbol,j) => { 
+        if (symbol === 1)  
+        inside2B.push(new Boundary({ 
+            position: { 
+                x: j * 32,
+                y: i * 32,
+            }
+        }))
+    })
+});
+
+
+//outside 1//
+const outside1B = []
+
+outside1Arr.forEach((row,i) =>{ 
+    row.forEach((symbol,j) => { 
+        if (symbol === 1)  
+        outside1B.push(new Boundary({ 
+            position: { 
+                x: j * 32,
+                y: i * 32,
+            }
+        }))
+    })
+});
+
+
+//cave//
+const caveB = []
+
+caveArr.forEach((row,i) =>{ 
+    row.forEach((symbol,j) => { 
+        if (symbol === 1)  
+        caveB.push(new Boundary({ 
+            position: { 
+                x: j * 32,
+                y: i * 32,
+            }
+        }))
+    })
+});
+
+
+//outside 2//
+const outside2B = []
+
+outside2Arr.forEach((row,i) =>{ 
+    row.forEach((symbol,j) => { 
+        if (symbol === 1)  
+        outside2B.push(new Boundary({ 
+            position: { 
+                x: j * 32,
+                y: i * 32,
+            }
+        }))
+    })
+});
+
+
+
+
+
+
+
+
+
 
 
 
@@ -372,7 +448,7 @@ function gameLoop() {
         door1.render();
         let doors = doorAlive();
         let hit = nextRoom(dude1, door1);
-        bounds.forEach(boundary =>{
+        inside1B.forEach(boundary =>{
             boundary.draw();
         })
 
