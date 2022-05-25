@@ -2,56 +2,62 @@ let inside = document.querySelector("#inside");
 let inside1C = inside.getContext('2d');
 
 
-document.querySelector('#mainM').play();
+//#region MUSIC CONTROLLS 
 
-function startScreen(){
-    document.querySelector('#mainM').pause();
-    let hidStart = document.querySelector('.startScreen');
-    hidStart.setAttribute('id','startScreenHide');
-    document.querySelector('#mainGame').play();
-    document.querySelector('#mainGame').volume=.5();
-}
+// document.querySelector('#mainM').play();
+// function startScreen() {
+//     document.querySelector('#mainM').pause();
+//     let hidStart = document.querySelector('.startScreen');
+//     hidStart.setAttribute('id', 'startScreenHide');
+//     document.querySelector('#mainGame').play();
 
-
-
-const dude2 = new Image();
-
-dude2.src = './Assets/again3.png';
-dude2.onload = loadImages;
-let cols = 4;
-let rows = 4;
-let spriteWidth = dude2.width/cols;
-let spriteHeight = dude2.height/rows;
-let totalFrames =4 ;
-let currentFrame = 0;
-let srcX = 0;
-let srcY = 0;
-let framesDrawn =0;
-let dudeHor = 430;
-let dudeVert =200;
+// }
+//#endregion
 
 
 
-function animate(){
-    inside1C.clearRect(0,0,inside.width,inside.height);
-    requestAnimationFrame(animate);
-    currentFrame = currentFrame % totalFrames;
-    srcX = currentFrame * spriteWidth;
+//#region PLAYER ANIMATION  
 
-    inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
-    inside1C.restore();
- 
-}
-animate();
+// const dude2 = new Image();
 
-let numOfImages = 4;
-function loadImages(){
-    if(--numOfImages>0) return;
-    animate();
-}
+// dude2.src = './Assets/again3.png';
+// dude2.onload = loadImages;
+// let cols = 4;
+// let rows = 4;
+// let spriteWidth = dude2.width / cols;
+// let spriteHeight = dude2.height / rows;
+// let totalFrames = 4;
+// let currentFrame = 0;
+// let srcX = 0;
+// let srcY = 0;
+// let framesDrawn = 0;
+// let dudeHor = 430;
+// let dudeVert = 200;
 
 
 
+// function animate() {
+//     inside1C.clearRect(0, 0, inside.width, inside.height);
+//     requestAnimationFrame(animate);
+//     currentFrame = currentFrame % totalFrames;
+//     srcX = currentFrame * spriteWidth;
+
+//     inside1C.drawImage(dude2, srcX, srcY, spriteWidth, spriteHeight, dudeHor, dudeVert, spriteWidth, spriteHeight);
+//     inside1C.restore();
+
+// }
+// animate();
+
+// let numOfImages = 4;
+// function loadImages() {
+//     if (--numOfImages > 0) return;
+//     animate();
+// }
+
+//#endregion
+
+
+//#region DOOR VARIABLES
 //FIRST ROOM//
 let dude1;
 let door1;
@@ -82,6 +88,11 @@ let gym;
 
 let gym2;
 let gymFight;
+
+//#endregion
+
+
+//#region  BOUNDARY ARRAYS
 
 //boundaries//
 
@@ -220,7 +231,7 @@ class Object {
         this.width = width;
         this.height = height;
         this.alive = true;
-        
+
     }
     render() {
         inside1C.fillStyle = this.color;
@@ -233,14 +244,14 @@ class Object {
 //boundary class for creating x and y coordinate based on true or false value of array//
 
 class Boundary {
-    constructor({position}){ //position function to be called later//
+    constructor({ position }) { //position function to be called later//
         this.position = position;
         this.width = 32;
         this.height = 32;
     }
-    draw(){
-        inside1C.fillStyle='red';
-        inside1C.fillRect(this.position.x,this.position.y,this.width,this.height);
+    draw() {
+        inside1C.fillStyle = 'red';
+        inside1C.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 }
 
@@ -249,15 +260,15 @@ class Boundary {
 //room one//
 const inside1B = [] //new array
 
-room1Arr.forEach((row,i) =>{ //iterate and define row index//
-    row.forEach((symbol,j) => { // iterate and define index within current row//
+room1Arr.forEach((row, i) => { //iterate and define row index//
+    row.forEach((symbol, j) => { // iterate and define index within current row//
         if (symbol === 1)  // if row index contains 1 //
-        inside1B.push(new Boundary({ //create object from boundary class//
-            position: { // create coordinates from multiplying block width and height by its index location//
-                x: j * 32,
-                y: i * 32,
-            }
-        }))
+            inside1B.push(new Boundary({ //create object from boundary class//
+                position: { // create coordinates from multiplying block width and height by its index location//
+                    x: j * 32,
+                    y: i * 32,
+                }
+            }))
     })
 });
 
@@ -265,15 +276,15 @@ room1Arr.forEach((row,i) =>{ //iterate and define row index//
 //room two//
 const inside2B = []
 
-room2Arr.forEach((row,i) =>{ 
-    row.forEach((symbol,j) => { 
-        if (symbol === 1)  
-        inside2B.push(new Boundary({ 
-            position: { 
-                x: j * 32,
-                y: i * 32,
-            }
-        }))
+room2Arr.forEach((row, i) => {
+    row.forEach((symbol, j) => {
+        if (symbol === 1)
+            inside2B.push(new Boundary({
+                position: {
+                    x: j * 32,
+                    y: i * 32,
+                }
+            }))
     })
 });
 
@@ -281,15 +292,15 @@ room2Arr.forEach((row,i) =>{
 //outside 1//
 const outside1B = []
 
-outside1Arr.forEach((row,i) =>{ 
-    row.forEach((symbol,j) => { 
-        if (symbol === 1)  
-        outside1B.push(new Boundary({ 
-            position: { 
-                x: j * 32,
-                y: i * 32,
-            }
-        }))
+outside1Arr.forEach((row, i) => {
+    row.forEach((symbol, j) => {
+        if (symbol === 1)
+            outside1B.push(new Boundary({
+                position: {
+                    x: j * 32,
+                    y: i * 32,
+                }
+            }))
     })
 });
 
@@ -297,15 +308,15 @@ outside1Arr.forEach((row,i) =>{
 //cave//
 const caveB = []
 
-caveArr.forEach((row,i) =>{ 
-    row.forEach((symbol,j) => { 
-        if (symbol === 1)  
-        caveB.push(new Boundary({ 
-            position: { 
-                x: j * 32,
-                y: i * 32,
-            }
-        }))
+caveArr.forEach((row, i) => {
+    row.forEach((symbol, j) => {
+        if (symbol === 1)
+            caveB.push(new Boundary({
+                position: {
+                    x: j * 32,
+                    y: i * 32,
+                }
+            }))
     })
 });
 
@@ -313,21 +324,22 @@ caveArr.forEach((row,i) =>{
 //outside 2//
 const outside2B = []
 
-outside2Arr.forEach((row,i) =>{ 
-    row.forEach((symbol,j) => { 
-        if (symbol === 1)  
-        outside2B.push(new Boundary({ 
-            position: { 
-                x: j * 32,
-                y: i * 32,
-            }
-        }))
+outside2Arr.forEach((row, i) => {
+    row.forEach((symbol, j) => {
+        if (symbol === 1)
+            outside2B.push(new Boundary({
+                position: {
+                    x: j * 32,
+                    y: i * 32,
+                }
+            }))
     })
 });
 
 
 
 
+//#endregion
 
 
 
@@ -335,43 +347,42 @@ outside2Arr.forEach((row,i) =>{
 
 
 
+//FIRST ROOM//
+dude1 = new Object(430, 200, "red", 20, 20);
+door1 = new Object(0, 320, "transparent", 30, 20);
 
-    //FIRST ROOM//
-    dude1 = new Object(430, 200, "red", 20, 20);
-    door1 = new Object(0, 320, "transparent", 30, 20);
+//SECOND ROOM//
+door2 = new Object(170, 620, "transparent", 40, 20);
+door3 = new Object(360, 260, "transparent", 40, 20);
 
-    //SECOND ROOM//
-    door2 = new Object(170, 620, "transparent", 40, 20);
-    door3 = new Object(360, 260, "transparent", 40, 20);
+//OUTSIDE//
+door4 = new Object(130, 220, "transparent", 40, 20);
+cave = new Object(450, 90, "transparent", 30, 20);
+grass = new Object(330, 260, "transparent", 180, 20);
+pokeCenter = new Object(320, 480, "transparent", 30, 20);
 
-    //OUTSIDE//
-    door4 = new Object(130, 220, "transparent", 40, 20);
-    cave = new Object(450, 90, "transparent", 30, 20);
-    grass = new Object(330,260 ,"transparent",180,20 );
-    pokeCenter = new Object(320,480,"transparent",30,20);
+//CAVE//
+cave2 = new Object(430, 0, "transparent", 80, 20);
+cave3 = new Object(140, 400, "transparent", 80, 20);
+caveFight = new Object(10, 250, "transparent", 610, 20)
 
-    //CAVE//
-    cave2 = new Object(430, 0, "transparent", 80, 20);
-    cave3 = new Object(140, 400, "transparent", 80, 20);
-    caveFight = new Object(10,250,"transparent",610,20)
-
-    //OUTSIDE2//
-    cave4 = new Object(450, 90, "transparent", 30, 20);
-    gym = new Object(130, 320, "transparent", 30, 20);
-   
-
-    //GYM//
-    gym2 = new Object(220,630,"transparent",160,20);
-    gymFight = new Object(310,100,"transparent",20,20);
+//OUTSIDE2//
+cave4 = new Object(450, 90, "transparent", 30, 20);
+gym = new Object(130, 320, "transparent", 30, 20);
 
 
-    //Boundaries//
+//GYM//
+gym2 = new Object(220, 630, "transparent", 160, 20);
+gymFight = new Object(310, 100, "transparent", 20, 20);
+
+
+//Boundaries//
 
 
 
-    setInterval(gameLoop, 80);
+setInterval(gameLoop, 80);
 
-    
+
 
 
 
@@ -382,57 +393,57 @@ function movementHandler(e) {
 
     switch (e.key) {
         case "w":
-            dude1.y -=10;
-            dudeVert -= 10;
-            srcY = 0* spriteHeight;
-            srcX = framesDrawn++;
-            if(framesDrawn >=0){
-                currentFrame ++;
-                framesDrawn =0;
-            }
+            dude1.y -= 10;
+            // dudeVert -= 10;
+            // srcY = 0 * spriteHeight;
+            // srcX = framesDrawn++;
+            // if (framesDrawn >= 0) {
+            //     currentFrame++;
+            //     framesDrawn = 0;
+            // }
 
             break
 
 
         case "s":
-            dude1.y +=10;
-            dudeVert += 10;
-            srcY = 3 * spriteHeight;
-            srcX = framesDrawn++;
-            if(framesDrawn >=0){
-                currentFrame ++;
-                framesDrawn =0;
-            }
+            dude1.y += 10;
+            // dudeVert += 10;
+            // srcY = 3 * spriteHeight;
+            // srcX = framesDrawn++;
+            // if (framesDrawn >= 0) {
+            //     currentFrame++;
+            //     framesDrawn = 0;
+            // }
             break
 
         case "a":
-            dude1.x -=10;
-            dudeHor -= 10;
-            srcY = 2* spriteHeight;
-            srcX = framesDrawn++;
-            if(framesDrawn >=0){
-                currentFrame ++;
-                framesDrawn =0;
-            }
+            dude1.x -= 10;
+            // dudeHor -= 10;
+            // srcY = 2 * spriteHeight;
+            // srcX = framesDrawn++;
+            // if (framesDrawn >= 0) {
+            //     currentFrame++;
+            //     framesDrawn = 0;
+            // }
             break
 
 
         case "d":
-            dude1.x +=10;
-            dudeHor += 10;
-            srcY = 1 * spriteHeight;
-            srcX = framesDrawn++;
-            if(framesDrawn >=0){
-                currentFrame ++;
-                framesDrawn =0;
-            }
+            // dude1.x += 10;
+            // dudeHor += 10;
+            // srcY = 1 * spriteHeight;
+            // srcX = framesDrawn++;
+            // if (framesDrawn >= 0) {
+            //     currentFrame++;
+            //     framesDrawn = 0;
+            // }
             break
 
     }
-   
-   console.log(dude1);
-   console.log(dudeHor);
-   console.log(dudeVert)
+
+    console.log(dude1);
+    console.log(dudeHor);
+    console.log(dudeVert)
 
 }
 
@@ -451,53 +462,56 @@ document.addEventListener("keydown", movementHandler)
 
 function gameLoop() {
     inside1C.clearRect(0, 0, inside.width, inside.height);
-   
+
     dude1.render();
 
     if (door1.alive) {
         door1.render();
         let doors = doorAlive();
         let hit = nextRoom(dude1, door1);
-        inside1B.forEach(boundary =>{
+        inside1B.forEach(boundary => {
             boundary.draw();
         })
 
-       
+        
+        // let hit2 = insideBoundary(dude1,)
+
 
     } if (door2.alive) {
         door2.render();
         let hit = goOutside(dude1, door2);
-        inside2B.forEach(boundary =>{
+        inside2B.forEach(boundary => {
             boundary.draw();
         })
+      
 
-    } if (door3.alive){    
+    } if (door3.alive) {
         door3.render();
         let hit = previousRoom(dude1, door3);
 
     } if (door4.alive) {
         door4.render();
         let hit = previousRoom2(dude1, door4);
-          
+
     } if (cave.alive) {
-        cave.render(); 
+        cave.render();
         let hit = enterCave(dude1, cave);
-        outside1B.forEach(boundary =>{
+        outside1B.forEach(boundary => {
             boundary.draw();
         })
- 
-    } if (grass.alive){
-        grass.render();
-        let hit = grassFight(dude1,grass);
 
-    } if (pokeCenter.alive){
+    } if (grass.alive) {
+        grass.render();
+        let hit = grassFight(dude1, grass);
+
+    } if (pokeCenter.alive) {
         pokeCenter.render();
-        let hit = healPokemon(dude1,pokeCenter);
+        let hit = healPokemon(dude1, pokeCenter);
 
     } if (cave2.alive) {
         cave2.render();
         let hit = previousRoom3(dude1, cave2);
-        caveB.forEach(boundary =>{
+        caveB.forEach(boundary => {
             boundary.draw();
         })
 
@@ -512,22 +526,22 @@ function gameLoop() {
     } if (cave4.alive) {
         cave4.render();
         let hit = previousRoom4(dude1, cave4);
-        outside2B.forEach(boundary =>{
+        outside2B.forEach(boundary => {
             boundary.draw();
         })
 
     } if (gym.alive) {
         gym.render();
-        let hit = enterGym(dude1,gym);
-    
-    }if (gym2.alive) {
+        let hit = enterGym(dude1, gym);
+
+    } if (gym2.alive) {
         gym2.render();
-        let hit = previousRoom5(dude1,gym2);
+        let hit = previousRoom5(dude1, gym2);
 
 
-    }if (gymFight.alive) {
+    } if (gymFight.alive) {
         gymFight.render();
-        let hit = gFight(dude1,gymFight);
+        let hit = gFight(dude1, gymFight);
 
 
     }
@@ -535,7 +549,8 @@ function gameLoop() {
 }
 
 
-function healPokemon(p1,p2){
+
+function healPokemon(p1, p2) {
     let enterRoom =
 
         p1.y + p1.height > p2.y &&
@@ -557,7 +572,7 @@ function healPokemon(p1,p2){
 
 }
 
-function pokeHealed(){
+function pokeHealed() {
     let health = Number(pHealth.textContent);
     let newHealth = 100;
     pHealth.textContent = newHealth;
@@ -568,7 +583,7 @@ function pokeHealed(){
     dudeVert = 510;
 
 }
-function healPokemon2(p1,p2){
+function healPokemon2(p1, p2) {
     let enterRoom =
 
         p1.y + p1.height > p2.y &&
@@ -590,7 +605,7 @@ function healPokemon2(p1,p2){
 
 }
 
-function pokeHealed2(){
+function pokeHealed2() {
     let health = Number(pHealth.textContent);
     let newHealth = 100;
     pHealth.textContent = newHealth;
@@ -604,24 +619,24 @@ function pokeHealed2(){
 }
 
 //function to start all doors dead//
-function doorAlive(){
-door1.alive = true;
-door2.alive = false;
-door3.alive = false;
-grass.alive = false;
-door4.alive = false;
-cave.alive = false;
-pokeCenter.alive = false;
-cave2.alive = false;
-cave3.alive = false;
-caveFight.alive = false;
-cave4.alive = false;
-gym.alive = false;
-pokeC= false;
-gym2.alive = false;
-gymFight.alive=false;
+function doorAlive() {
+    door1.alive = true;
+    door2.alive = false;
+    door3.alive = false;
+    grass.alive = false;
+    door4.alive = false;
+    cave.alive = false;
+    pokeCenter.alive = false;
+    cave2.alive = false;
+    cave3.alive = false;
+    caveFight.alive = false;
+    cave4.alive = false;
+    gym.alive = false;
+    pokeC = false;
+    gym2.alive = false;
+    gymFight.alive = false;
 
-    
+
 }
 
 
@@ -652,8 +667,8 @@ function nextRoom(p1, p2) {
 
 function hideRoom() {
     door1.alive = false;
-            door2.alive = true;
-            door3.alive = true;
+    door2.alive = true;
+    door3.alive = true;
     grass.alive = false;
     door4.alive = false;
     cave.alive = false;
@@ -663,10 +678,10 @@ function hideRoom() {
     caveFight.alive = false;
     cave4.alive = false;
     gym.alive = false;
-    pokeC= false;
+    pokeC = false;
     gym2.alive = false;
-    gymFight.alive=false;
-    
+    gymFight.alive = false;
+
 
     let roomTrans = document.querySelector('#inside');
     roomTrans.setAttribute("id", "inside2");
@@ -718,10 +733,10 @@ function leaveHouse() {
     caveFight.alive = false;
     cave4.alive = false;
     gym.alive = false;
-    pokeC= false;
+    pokeC = false;
     gym2.alive = false;
-    gymFight.alive=false;
-    
+    gymFight.alive = false;
+
 
     let roomTrans = document.querySelector('#inside2');
     roomTrans.setAttribute("id", "outside");
@@ -771,10 +786,10 @@ function lastRoom() {
     caveFight.alive = false;
     cave4.alive = false;
     gym.alive = false;
-    pokeC= false;
+    pokeC = false;
     gym2.alive = false;
-    gymFight.alive=false;
-    
+    gymFight.alive = false;
+
 
 
     let roomTrans = document.querySelector('#inside2');
@@ -825,10 +840,10 @@ function lastRoom2() {
     caveFight.alive = false;
     cave4.alive = false;
     gym.alive = false;
-    pokeC= false;
+    pokeC = false;
     gym2.alive = false;
-    gymFight.alive=false;
-    
+    gymFight.alive = false;
+
 
     let roomTrans2 = document.querySelector('#outside');
     roomTrans2.setAttribute('id', "inside2");
@@ -866,24 +881,24 @@ function enterCave(p1, p2) {
 }
 
 function insideCave() {
-door1.alive = false;
-door2.alive = false;
-door3.alive = false;
-grass.alive = false;
-door4.alive = false;
-cave.alive = false;
-pokeCenter.alive = false;
-cave2.alive = true;
-cave3.alive = true;
-caveFight.alive = true;
-cave4.alive = false;
-gym.alive = false;
-pokeC= false;
-gym2.alive = false;
-gymFight.alive=false;
+    door1.alive = false;
+    door2.alive = false;
+    door3.alive = false;
+    grass.alive = false;
+    door4.alive = false;
+    cave.alive = false;
+    pokeCenter.alive = false;
+    cave2.alive = true;
+    cave3.alive = true;
+    caveFight.alive = true;
+    cave4.alive = false;
+    gym.alive = false;
+    pokeC = false;
+    gym2.alive = false;
+    gymFight.alive = false;
 
-    
-   
+
+
     let caveTrans = document.querySelector('#outside');
     caveTrans.setAttribute("id", "cave");
     dude1.x = 460;
@@ -921,21 +936,21 @@ function previousRoom3(p1, p2) {
 }
 
 function lastRoom3() {
-door1.alive = false;
-door2.alive = false;
-door3.alive = false;
-grass.alive = false;
-door4.alive = true;
-cave.alive = true;
-pokeCenter.alive = true;
-cave2.alive = false;
-cave3.alive = false;
-caveFight.alive = false;
-cave4.alive = false;
-gym.alive = false;
-pokeC= false;
-gym2.alive = false;
-gymFight.alive=false;
+    door1.alive = false;
+    door2.alive = false;
+    door3.alive = false;
+    grass.alive = false;
+    door4.alive = true;
+    cave.alive = true;
+    pokeCenter.alive = true;
+    cave2.alive = false;
+    cave3.alive = false;
+    caveFight.alive = false;
+    cave4.alive = false;
+    gym.alive = false;
+    pokeC = false;
+    gym2.alive = false;
+    gymFight.alive = false;
 
 
     let roomTrans3 = document.querySelector('#cave');
@@ -972,28 +987,28 @@ function leaveCave(p1, p2) {
 }
 //GO FROM CAVE TO OUTSIDE 2//
 function outsideCave() {
-door1.alive = false;
-door2.alive = false;
-door3.alive = false;
-grass.alive = false;
-door4.alive = false;
-cave.alive = false;
-pokeCenter.alive = false;
-cave2.alive = false;
-cave3.alive = false;
-caveFight.alive = false;
-cave4.alive = true;
-gym.alive = true;
-pokeC = true;
-gym2.alive = false;
-gymFight.alive=false;
+    door1.alive = false;
+    door2.alive = false;
+    door3.alive = false;
+    grass.alive = false;
+    door4.alive = false;
+    cave.alive = false;
+    pokeCenter.alive = false;
+    cave2.alive = false;
+    cave3.alive = false;
+    caveFight.alive = false;
+    cave4.alive = true;
+    gym.alive = true;
+    pokeC = true;
+    gym2.alive = false;
+    gymFight.alive = false;
 
-let roomTrans3 = document.querySelector('#cave');
-roomTrans3.setAttribute("id", "outside2");
-dude1.x = 450;
-dude1.y = 130;
-dudeHor = 450;
-dudeVert = 120;
+    let roomTrans3 = document.querySelector('#cave');
+    roomTrans3.setAttribute("id", "outside2");
+    dude1.x = 450;
+    dude1.y = 130;
+    dudeHor = 450;
+    dudeVert = 120;
 
 
 }
@@ -1025,21 +1040,21 @@ function previousRoom4(p1, p2) {
 }
 
 function lastRoom4() {
-door1.alive = false;
-door2.alive = false;
-door3.alive = false;
-grass.alive = false;
-door4.alive = false;
-cave.alive = false;
-pokeCenter.alive = false;
-cave2.alive = true;
-cave3.alive = true;
-caveFight.alive = false;
-cave4.alive = false;
-gym.alive = false;
-pokeC= false;
-gym2.alive = false;
-gymFight.alive=false;
+    door1.alive = false;
+    door2.alive = false;
+    door3.alive = false;
+    grass.alive = false;
+    door4.alive = false;
+    cave.alive = false;
+    pokeCenter.alive = false;
+    cave2.alive = true;
+    cave3.alive = true;
+    caveFight.alive = false;
+    cave4.alive = false;
+    gym.alive = false;
+    pokeC = false;
+    gym2.alive = false;
+    gymFight.alive = false;
 
 
     let roomTrans3 = document.querySelector('#outside2');
@@ -1077,28 +1092,28 @@ function enterGym(p1, p2) {
 }
 
 function inGym() {
-    
-door1.alive = false;
-door2.alive = false;
-door3.alive = false;
-grass.alive = false;
-door4.alive = false;
-cave.alive = false;
-pokeCenter.alive = false;
-cave2.alive = false;
-cave3.alive = false;
-caveFight.alive = false;
-cave4.alive = false;
-gym.alive = false;
-pokeC= false;
-gym2.alive = true;
-gymFight.alive=true;
 
-    
-let health = Number(pHealth.textContent);
-let newHealth = 100;
-pHealth.textContent = newHealth;
-alert("Your Pokemon Were Healed!");
+    door1.alive = false;
+    door2.alive = false;
+    door3.alive = false;
+    grass.alive = false;
+    door4.alive = false;
+    cave.alive = false;
+    pokeCenter.alive = false;
+    cave2.alive = false;
+    cave3.alive = false;
+    caveFight.alive = false;
+    cave4.alive = false;
+    gym.alive = false;
+    pokeC = false;
+    gym2.alive = true;
+    gymFight.alive = true;
+
+
+    let health = Number(pHealth.textContent);
+    let newHealth = 100;
+    pHealth.textContent = newHealth;
+    alert("Your Pokemon Were Healed!");
 
 
     let roomTrans3 = document.querySelector('#outside2');
@@ -1137,21 +1152,21 @@ function previousRoom5(p1, p2) {
 
 function lastRoom5() {
 
-door1.alive = false;
-door2.alive = false;
-door3.alive = false;
-grass.alive = false;
-door4.alive = false;
-cave.alive = false;
-pokeCenter.alive = false;
-cave2.alive = false;
-cave3.alive = false;
-caveFight.alive = false;
-cave4.alive = true;
-gym.alive = true;
-pokeC= true;
-gym2.alive = false;
-gymFight.alive=false;
+    door1.alive = false;
+    door2.alive = false;
+    door3.alive = false;
+    grass.alive = false;
+    door4.alive = false;
+    cave.alive = false;
+    pokeCenter.alive = false;
+    cave2.alive = false;
+    cave3.alive = false;
+    caveFight.alive = false;
+    cave4.alive = true;
+    gym.alive = true;
+    pokeC = true;
+    gym2.alive = false;
+    gymFight.alive = false;
 
 
     let roomTrans4 = document.querySelector('#gym');
@@ -1176,182 +1191,184 @@ let fightScreen1 = document.querySelector('.fightSequence');
 
 
 // player hit values//
-const arr = [20,20,20,20]; //player fight buttons
+const arr = [50]; //player fight buttons
+const arrCrit = [20, 20, 20, 0, 0]; //player fight buttons
+
 
 //computer hit values//
-const arr2 = [20,10,10,10,5,5,5,0,0]; //comp1 fight buttons
-const arr3 = [20,10,10,10,5,5,5,0,0]; //comp2 fight buttons
-const arr4 = [20,20,10,10,5,5]; //comp2 fight buttons
+const arr2 = [20, 10, 5, 5, 5, 0, 0]; //comp1 fight buttons
+const arr3 = [20, 10, 10, 10, 5, 5, 0, 0]; //comp2 fight buttons
+const arr4 = [20, 20, 10, 10, 5, 5]; //comp2 fight buttons
 
 //grass fight//
-function attack(){
+function attack() {
 
     let attackPoints = Number(cHealth.textContent);
-    let randomArr = arr[Math.floor(Math.random()*arr.length)];
+    let randomArr = arr[Math.floor(Math.random() * arr.length)];
     let newHealth = attackPoints - randomArr;
     cHealth.textContent = newHealth;
-     
+
     if (randomArr === 20) {
-        alert("Charmander used Fireball- It was very effective!");
-    }else if (randomArr === 10) {
-        alert("Charmander used Fireball- It was effective!");
-    }else if (randomArr === 5) {
-        alert("Charmander used Fireball- It wasn't very effective!");
+        alert("Charmander used Flamethrower- It was very effective!");
+    } else if (randomArr === 10) {
+        alert("Charmander used Fireball - It was effective!");
+    } else if (randomArr === 5) {
+        alert("Charmander used Scratch - It wasn't very effective!");
     } else {
-        alert("Charmander used Fireball- It was a miss!");
+        alert("Charmander used Flamethrower - It was a miss!");
     }
-    if(newHealth <= 0 ){
-        grass.alive=false;
+    if (newHealth <= 0) {
+        grass.alive = false;
         let fightScreen1 = document.querySelector(".fight");
-        fightScreen1.setAttribute("id","fightSequenceHide");
+        fightScreen1.setAttribute("id", "fightSequenceHide");
         cHealth.textContent = 100;
         dude1.render();
-        inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
+        inside1C.drawImage(dude2, srcX, srcY, spriteWidth, spriteHeight, dudeHor, dudeVert, spriteWidth, spriteHeight);
         document.querySelector('#mainGame').play();
-    document.querySelector('#fightM').pause();
+        document.querySelector('#fightM').pause();
 
-        
-        
-    }
-          
+
+
     }
 
-    // CAVE FIGHT//
+}
 
-function attack2(){
+// CAVE FIGHT//
+
+function attack2() {
 
     let attackPoints = Number(c2Health.textContent);
-    let randomArr = arr[Math.floor(Math.random()*arr.length)];
+    let randomArr = arr[Math.floor(Math.random() * arr.length)];
     let newHealth = attackPoints - randomArr;
     c2Health.textContent = newHealth;
-     
+
     if (randomArr === 20) {
         alert("Charmander used Fireball- It was very effective!");
-    }else if (randomArr === 10) {
+    } else if (randomArr === 10) {
         alert("Charmander used Fireball- It was effective!");
-    }else if (randomArr === 5) {
+    } else if (randomArr === 5) {
         alert("Charmander used Fireball- It wasn't very effective!");
     } else {
         alert("Charmander used Fireball- It was a miss!");
     }
-    if (newHealth <= 0 ){
-        caveFight.alive=false;
+    if (newHealth <= 0) {
+        caveFight.alive = false;
         let fightScreen1 = document.querySelector(".fight");
-        fightScreen1.setAttribute("id","fightSequenceHide");
+        fightScreen1.setAttribute("id", "fightSequenceHide");
         c2Health.textContent = 100;
         dude1.render();
-        inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
+        inside1C.drawImage(dude2, srcX, srcY, spriteWidth, spriteHeight, dudeHor, dudeVert, spriteWidth, spriteHeight);
         document.querySelector('#mainGame').play();
         document.querySelector('#fightM').pause();
-        
-    }
-          
+
     }
 
-    //gym Fight!//
+}
 
-function attack3(){
+//gym Fight!//
+
+function attack3() {
 
     let attackPoints = Number(c3Health.textContent);
-    let randomArr = arr[Math.floor(Math.random()*arr.length)];
+    let randomArr = arr[Math.floor(Math.random() * arr.length)];
     let newHealth = attackPoints - randomArr;
     c3Health.textContent = newHealth;
-     
+
     if (randomArr === 20) {
         alert("Charmander used Flamethrower - It was very effective!");
-    }else if (randomArr === 10) {
+    } else if (randomArr === 10) {
         alert("Charmander used Fireball - It was effective!");
-    }else if (randomArr === 5) {
+    } else if (randomArr === 5) {
         alert("Charmander used Scratch - It wasn't very effective!");
     } else {
         alert("Charmander used Fireball - It was a miss!");
     }
-    if (newHealth <= 0 ){
-        gymFight.alive=false;
+    if (newHealth <= 0) {
+        gymFight.alive = false;
         let fightScreen1 = document.querySelector(".fight");
-        fightScreen1.setAttribute("id","fightSequenceHide");
+        fightScreen1.setAttribute("id", "fightSequenceHide");
         let winScreen = document.querySelector('.youwin');
-        winScreen.setAttribute('id','youwin');
+        winScreen.setAttribute('id', 'youwin');
         c3Health.textContent = 100;
         fightMusic.pause();
         music.play();
         dude1.render();
-        inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
+        inside1C.drawImage(dude2, srcX, srcY, spriteWidth, spriteHeight, dudeHor, dudeVert, spriteWidth, spriteHeight);
         document.querySelector('#mainGame').play();
         document.querySelector('#fightM').pause();
-        
-    }
-          
+
     }
 
-    // grass fight //
-    function returnAttack (){
-        setTimeout(function(){
-            let attackPoints = Number(pHealth.textContent);
-            let randomArr = arr2[Math.floor(Math.random()*arr.length)];
-            let newHealth = attackPoints - randomArr;
-            pHealth.textContent = newHealth;
-            
-            if (randomArr === 20) {
-                alert("Growlthie used SCRATCH - It was very effective!");
-            }else if (randomArr === 10) {
-                alert("Growlthie used SCRATCH - It was effective!");
-            }else if (randomArr === 5) {
-                alert("Growlthie used SCRATCH - It wasn't very effective!");
-            } else {
-                alert("Growlthie used SCRATCH - It was a miss!");
-            }
-            console.log(newHealth);
-        },3000);
-       
-    }
+}
 
-    // cave fight //
-    function returnAttack2 (){
-        setTimeout(function(){
-            let attackPoints = Number(pHealth.textContent);
-            let randomArr = arr3[Math.floor(Math.random()*arr.length)];
-            let newHealth = attackPoints - randomArr;
-            pHealth.textContent = newHealth;
-            
-            if (randomArr === 20) {
-                alert("Machop used Avalanche - It was very effective!");
-            }else if (randomArr === 10) {
-                alert("Machop used Rock Smash - It was effective!");
-            }else if (randomArr === 5) {
-                alert("Machop used Punch - It wasn't very effective!");
-            } else {
-                alert("Machop used Punch - It was a miss!");
-            }
-            console.log(newHealth);
-        },3000);
-       
-    }
-    // gym fight //
-    function returnAttack3 (){
-        setTimeout(function(){
-            let attackPoints = Number(pHealth.textContent);
-            let randomArr = arr4[Math.floor(Math.random()*arr.length)];
-            let newHealth = attackPoints - randomArr;
-            pHealth.textContent = newHealth;
-            
-            if (randomArr === 20) {
-                alert("Articuno used Hyper Beam - It was very effective!");
-            }else if (randomArr === 10) {
-                alert("Articuno used Frost Bite - It was effective!");
-            }else if (randomArr === 5) {
-                alert("Articuno used Scratch - It wasn't very effective!");
-            } else {
-                alert("Articuno used Punch - It was a miss!");
-            }
-            console.log(newHealth);
-        },3000);
-       
-    }
+// grass fight //
+function returnAttack() {
+    setTimeout(function () {
+        let attackPoints = Number(pHealth.textContent);
+        let randomArr = arr2[Math.floor(Math.random() * arr.length)];
+        let newHealth = attackPoints - randomArr;
+        pHealth.textContent = newHealth;
+
+        if (randomArr === 20) {
+            alert("Growlthie used SCRATCH - It was very effective!");
+        } else if (randomArr === 10) {
+            alert("Growlthie used SCRATCH - It was effective!");
+        } else if (randomArr === 5) {
+            alert("Growlthie used SCRATCH - It wasn't very effective!");
+        } else {
+            alert("Growlthie used SCRATCH - It was a miss!");
+        }
+        console.log(newHealth);
+    }, 3000);
+
+}
+
+// cave fight //
+function returnAttack2() {
+    setTimeout(function () {
+        let attackPoints = Number(pHealth.textContent);
+        let randomArr = arr3[Math.floor(Math.random() * arr.length)];
+        let newHealth = attackPoints - randomArr;
+        pHealth.textContent = newHealth;
+
+        if (randomArr === 20) {
+            alert("Machop used Avalanche - It was very effective!");
+        } else if (randomArr === 10) {
+            alert("Machop used Rock Smash - It was effective!");
+        } else if (randomArr === 5) {
+            alert("Machop used Punch - It wasn't very effective!");
+        } else {
+            alert("Machop used Punch - It was a miss!");
+        }
+        console.log(newHealth);
+    }, 3000);
+
+}
+// gym fight //
+function returnAttack3() {
+    setTimeout(function () {
+        let attackPoints = Number(pHealth.textContent);
+        let randomArr = arr4[Math.floor(Math.random() * arr.length)];
+        let newHealth = attackPoints - randomArr;
+        pHealth.textContent = newHealth;
+
+        if (randomArr === 20) {
+            alert("Articuno used Hyper Beam - It was very effective!");
+        } else if (randomArr === 10) {
+            alert("Articuno used Frost Bite - It was effective!");
+        } else if (randomArr === 5) {
+            alert("Articuno used Scratch - It wasn't very effective!");
+        } else {
+            alert("Articuno used Punch - It was a miss!");
+        }
+        console.log(newHealth);
+    }, 3000);
+
+}
 
 
 
-function heal(){
+function heal() {
 
 
 
@@ -1359,17 +1376,17 @@ function heal(){
     let healPoints = Number(pHealth.textContent);
     let newHealth = healPoints + 20;
     pHealth.textContent = newHealth;
-   
-    
-    if (newHealth=== 0){
-        
-        
+
+
+    if (newHealth === 0) {
+
+
     }
 
 }
-   
+
 function grassFight(p1, p2) {
-   
+
     let fight =
 
         p1.y + p1.height > p2.y &&
@@ -1378,11 +1395,11 @@ function grassFight(p1, p2) {
         p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
 
     if (fight) {
-        
-        return startFight1();
-        
 
-        
+        return startFight1();
+
+
+
 
 
 
@@ -1399,11 +1416,11 @@ function grassFight(p1, p2) {
 function startFight1() {
     document.querySelector('#mainGame').pause();
     document.querySelector('#fightM').play();
-        
+
 
     let fightBoard = document.querySelector('.fight');
     fightBoard.setAttribute("id", "fightSequence");
-    
+
 
 }
 
@@ -1443,14 +1460,14 @@ function startFight2() {
     caveFightBoard.setAttribute("id", "fightSequence");
 
     let pokeOpp = document.querySelector('.growlthie');
-    pokeOpp.setAttribute('id','growlthieHide');
+    pokeOpp.setAttribute('id', 'growlthieHide');
 
     let pokeOpp2 = document.querySelector('.machop');
-    pokeOpp2.setAttribute('id','machop');
-    
+    pokeOpp2.setAttribute('id', 'machop');
 
 
-    
+
+
 
 }
 //gym fight//
@@ -1487,22 +1504,50 @@ function startFight3() {
     caveFightBoard.setAttribute("id", "fightSequence");
 
     let pokeOpp2 = document.querySelector('.machop');
-    pokeOpp2.setAttribute('id','machopHide');
+    pokeOpp2.setAttribute('id', 'machopHide');
 
     let pokeOpp3 = document.querySelector('.articuno');
-    pokeOpp3.setAttribute('id','articuno');
-    
+    pokeOpp3.setAttribute('id', 'articuno');
 
 
-    
+
+
 
 }
+// function insideBoundary(p1, p2) {
+function insideBoundary(p1, p2) {
+
+let positions =[];
+for (i =0; i< inside1B.length; i++){
+    positions.push(inside1B[i].position);
+};
+
+
+// console.log("x",positions.x);
+
+
+console.log(positions);
+    // let hit =
+
+        // p1.y + p1.height > p2.y &&
+        // p1.y < p2.y + p2.height &&
+        // p1.x + p1.width > p2.x &&
+        // p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    // if (hit) {
+    //     return startFight2();
+
+
+
+    // } else {
+    //     return false;
+    // }
 
 
 
 
 
+}
+insideBoundary();
 
-
-
-
+// console.log(inside1B);
