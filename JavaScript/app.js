@@ -2,46 +2,53 @@ let inside = document.querySelector("#inside");
 let inside1C = inside.getContext('2d');
 
 
-const mainMp3 = document.querySelector('#main');
-const fightMp3 = document.querySelector('#fightM');
+document.querySelector('#mainM').play();
+
+function startScreen(){
+    document.querySelector('#mainM').pause();
+    let hidStart = document.querySelector('.startScreen');
+    hidStart.setAttribute('id','startScreenHide');
+    document.querySelector('#mainGame').play();
+    document.querySelector('#mainGame').volume=.5();
+}
 
 
 
-// const dude2 = new Image();
+const dude2 = new Image();
 
-// dude2.src = './Assets/again3.png';
-// dude2.onload = loadImages;
-// let cols = 4;
-// let rows = 4;
-// let spriteWidth = dude2.width/cols;
-// let spriteHeight = dude2.height/rows;
-// let totalFrames =4 ;
-// let currentFrame = 0;
-// let srcX = 0;
-// let srcY = 0;
-// let framesDrawn =0;
-// let dudeHor = 430;
-// let dudeVert =200;
+dude2.src = './Assets/again3.png';
+dude2.onload = loadImages;
+let cols = 4;
+let rows = 4;
+let spriteWidth = dude2.width/cols;
+let spriteHeight = dude2.height/rows;
+let totalFrames =4 ;
+let currentFrame = 0;
+let srcX = 0;
+let srcY = 0;
+let framesDrawn =0;
+let dudeHor = 430;
+let dudeVert =200;
 
 
 
-// function animate(){
-//     inside1C.clearRect(0,0,inside.width,inside.height);
-//     requestAnimationFrame(animate);
-//     currentFrame = currentFrame % totalFrames;
-//     srcX = currentFrame * spriteWidth;
+function animate(){
+    inside1C.clearRect(0,0,inside.width,inside.height);
+    requestAnimationFrame(animate);
+    currentFrame = currentFrame % totalFrames;
+    srcX = currentFrame * spriteWidth;
 
-//     inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
-//     inside1C.restore();
+    inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
+    inside1C.restore();
  
-// }
-// animate();
+}
+animate();
 
-// let numOfImages = 4;
-// function loadImages(){
-//     if(--numOfImages>0) return;
-//     animate();
-// }
+let numOfImages = 4;
+function loadImages(){
+    if(--numOfImages>0) return;
+    animate();
+}
 
 
 
@@ -237,6 +244,8 @@ class Boundary {
     }
 }
 
+
+
 //room one//
 const inside1B = [] //new array
 
@@ -374,48 +383,49 @@ function movementHandler(e) {
     switch (e.key) {
         case "w":
             dude1.y -=10;
-            // dudeVert -= 10;
-            // srcY = 0* spriteHeight;
-            // srcX = framesDrawn++;
-            // if(framesDrawn >=0){
-            //     currentFrame ++;
-            //     framesDrawn =0;
-            // }
+            dudeVert -= 10;
+            srcY = 0* spriteHeight;
+            srcX = framesDrawn++;
+            if(framesDrawn >=0){
+                currentFrame ++;
+                framesDrawn =0;
+            }
+
             break
 
 
         case "s":
             dude1.y +=10;
-            // dudeVert += 10;
-            // srcY = 3 * spriteHeight;
-            // srcX = framesDrawn++;
-            // if(framesDrawn >=0){
-            //     currentFrame ++;
-            //     framesDrawn =0;
-            // }
+            dudeVert += 10;
+            srcY = 3 * spriteHeight;
+            srcX = framesDrawn++;
+            if(framesDrawn >=0){
+                currentFrame ++;
+                framesDrawn =0;
+            }
             break
 
         case "a":
             dude1.x -=10;
-            // dudeHor -= 10;
-            // srcY = 2* spriteHeight;
-            // srcX = framesDrawn++;
-            // if(framesDrawn >=0){
-            //     currentFrame ++;
-            //     framesDrawn =0;
-            // }
+            dudeHor -= 10;
+            srcY = 2* spriteHeight;
+            srcX = framesDrawn++;
+            if(framesDrawn >=0){
+                currentFrame ++;
+                framesDrawn =0;
+            }
             break
 
 
         case "d":
             dude1.x +=10;
-            // dudeHor += 10;
-            // srcY = 1 * spriteHeight;
-            // srcX = framesDrawn++;
-            // if(framesDrawn >=0){
-            //     currentFrame ++;
-            //     framesDrawn =0;
-            // }
+            dudeHor += 10;
+            srcY = 1 * spriteHeight;
+            srcX = framesDrawn++;
+            if(framesDrawn >=0){
+                currentFrame ++;
+                framesDrawn =0;
+            }
             break
 
     }
@@ -430,7 +440,7 @@ function movementHandler(e) {
 document.addEventListener("keydown", movementHandler)
 
 
-document.querySelector('#mainM').play();
+
 
 
 
@@ -451,6 +461,8 @@ function gameLoop() {
         inside1B.forEach(boundary =>{
             boundary.draw();
         })
+
+       
 
     } if (door2.alive) {
         door2.render();
@@ -1195,7 +1207,7 @@ function attack(){
         cHealth.textContent = 100;
         dude1.render();
         inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
-        document.querySelector('#mainM').play();
+        document.querySelector('#mainGame').play();
     document.querySelector('#fightM').pause();
 
         
@@ -1229,7 +1241,8 @@ function attack2(){
         c2Health.textContent = 100;
         dude1.render();
         inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
-        
+        document.querySelector('#mainGame').play();
+        document.querySelector('#fightM').pause();
         
     }
           
@@ -1264,7 +1277,8 @@ function attack3(){
         music.play();
         dude1.render();
         inside1C.drawImage(dude2,srcX,srcY,spriteWidth, spriteHeight, dudeHor,dudeVert, spriteWidth, spriteHeight);
-        
+        document.querySelector('#mainGame').play();
+        document.querySelector('#fightM').pause();
         
     }
           
@@ -1383,7 +1397,7 @@ function grassFight(p1, p2) {
 }
 
 function startFight1() {
-    document.querySelector('#mainM').pause();
+    document.querySelector('#mainGame').pause();
     document.querySelector('#fightM').play();
         
 
@@ -1421,6 +1435,9 @@ function cFight(p1, p2) {
 }
 
 function startFight2() {
+
+    document.querySelector('#mainGame').pause();
+    document.querySelector('#fightM').play();
 
     let caveFightBoard = document.querySelector('.fight');
     caveFightBoard.setAttribute("id", "fightSequence");
@@ -1463,6 +1480,9 @@ function gFight(p1, p2) {
 
 function startFight3() {
 
+    document.querySelector('#mainGame').pause();
+    document.querySelector('#fightM').play();
+
     let caveFightBoard = document.querySelector('.fight');
     caveFightBoard.setAttribute("id", "fightSequence");
 
@@ -1477,6 +1497,10 @@ function startFight3() {
     
 
 }
+
+
+
+
 
 
 
