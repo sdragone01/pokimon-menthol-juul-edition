@@ -455,6 +455,9 @@ function gameLoop() {
     } if (door2.alive) {
         door2.render();
         let hit = goOutside(dude1, door2);
+        inside2B.forEach(boundary =>{
+            boundary.draw();
+        })
 
     } if (door3.alive){    
         door3.render();
@@ -467,6 +470,9 @@ function gameLoop() {
     } if (cave.alive) {
         cave.render(); 
         let hit = enterCave(dude1, cave);
+        outside1B.forEach(boundary =>{
+            boundary.draw();
+        })
  
     } if (grass.alive){
         grass.render();
@@ -479,6 +485,9 @@ function gameLoop() {
     } if (cave2.alive) {
         cave2.render();
         let hit = previousRoom3(dude1, cave2);
+        caveB.forEach(boundary =>{
+            boundary.draw();
+        })
 
     } if (cave3.alive) {
         cave3.render();
@@ -491,6 +500,9 @@ function gameLoop() {
     } if (cave4.alive) {
         cave4.render();
         let hit = previousRoom4(dude1, cave4);
+        outside2B.forEach(boundary =>{
+            boundary.draw();
+        })
 
     } if (gym.alive) {
         gym.render();
