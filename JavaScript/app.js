@@ -78,16 +78,30 @@ let gymFight;
 
 //boundaries//
 
-let b1;
-let b2;
-let b3;
-let b4;
-let b5;
-let b6;
-let b7;
-let b8;
-let b9;
-let b10;
+const room1Arr = [
+
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+];
+
 
 
 
@@ -106,9 +120,38 @@ class Object {
         inside1C.fillRect(this.x, this.y, this.width, this.height,)
     }
 
-
-
 }
+
+
+
+class Boundary {
+    constructor({position}){
+        this.position = position;
+        this.width = 32;
+        this.height = 32;
+    }
+    draw(){
+        inside1C.fillStyle='red';
+        inside1C.fillRect(this.position.x,this.position.y,this.width,this.height);
+    }
+}
+
+const bounds = []
+
+room1Arr.forEach((row,i) =>{
+    row.forEach((symbol,j) => {
+        if (symbol === 1)
+        bounds.push(new Boundary({
+            position: {
+                x: j * 32,
+                y: i * 32,
+            }
+        }))
+    })
+})
+console.log(bounds);
+
+
 
     //FIRST ROOM//
     dude1 = new Object(430, 200, "red", 20, 20);
@@ -141,9 +184,6 @@ class Object {
 
     //Boundaries//
 
-    b1 = new Object(270,180,"red",350,10);
-    b2 = new Object(280,180,"red",10,140);
-    b3 = new Object(610,180,"red",10,140);
 
 
     setInterval(gameLoop, 80);
@@ -227,15 +267,16 @@ document.querySelector('#mainM').play();
 
 function gameLoop() {
     inside1C.clearRect(0, 0, inside.width, inside.height);
-    b1.render();
-    b2.render();
-
+   
     dude1.render();
 
     if (door1.alive) {
         door1.render();
         let doors = doorAlive();
         let hit = nextRoom(dude1, door1);
+        bounds.forEach(boundary =>{
+            boundary.draw();
+        })
 
     } if (door2.alive) {
         door2.render();
