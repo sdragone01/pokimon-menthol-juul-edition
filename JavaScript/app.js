@@ -4,14 +4,16 @@ let inside1C = inside.getContext('2d');
 
 //#region MUSIC CONTROLLS 
 
-// document.querySelector('#mainM').play();
-// function startScreen() {
-//     document.querySelector('#mainM').pause();
-//     let hidStart = document.querySelector('.startScreen');
-//     hidStart.setAttribute('id', 'startScreenHide');
-//     document.querySelector('#mainGame').play();
+document.querySelector('#mainM').play();
+document.querySelector('#mainM').volume=0.1;
+function startScreen() {
+    document.querySelector('#mainM').pause();
+    let hidStart = document.querySelector('.startScreen');
+    hidStart.setAttribute('id', 'startScreenHide');
+    document.querySelector('#mainGame').play();
+    document.querySelector('#mainGame').volume = 0.3;
 
-// }
+}
 //#endregion
 
 //#region PLAYER ANIMATION  
@@ -51,6 +53,10 @@ function loadImages() {
     if (--numOfImages > 0) return;
     animate();
 }
+
+
+
+
 
 //#endregion
 
@@ -163,7 +169,7 @@ const outside1Arr = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1],
     [1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
     [1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1],
     [1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1],
@@ -175,7 +181,7 @@ const outside1Arr = [
     [1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0],
     [1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
@@ -218,8 +224,8 @@ const outside2Arr = [
     [1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
     [1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
     [1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-    [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
     [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1],
@@ -404,10 +410,10 @@ function movementHandler(e) {
     for (i =0; i< inside1B.length; i++){
  
 
-        if  (dude1.x + dude1.width > inside1B[i].position.x &&
-            dude1.x < inside1B[i].position.x + 32 &&
-            dude1.y + dude1.height > inside1B[i].position.y &&
-            dude1.y < inside1B[i].position.y +32){
+        if  (dude1.x + dude1.width >= inside1B[i].position.x &&
+            dude1.x <= inside1B[i].position.x + 32 &&
+            dude1.y + dude1.height >= inside1B[i].position.y &&
+            dude1.y <= inside1B[i].position.y +32){
         
             colliding = true;
         } 
@@ -501,6 +507,9 @@ if (cave3.alive){
 if (gym.alive){
     move5()
 }
+if (gym2.alive){
+    move6()
+}
 //#endregion
 
 //#region inside 1 move controll
@@ -509,8 +518,8 @@ if (gym.alive){
 function move1 () {
     if (keys.w.pressed && lastKey === 'w' && colliding === false){
         
-        dude1.y -= 10;
-        dudeVert -= 10;
+        dude1.y -= 20;
+        dudeVert -= 20;
         srcY = 0 * spriteHeight;
         srcX = framesDrawn++;
         if (framesDrawn >= 0) {
@@ -520,8 +529,8 @@ function move1 () {
         
     }
     else if (keys.s.pressed &&  lastKey === 's' && colliding === false){
-        dude1.y += 10;
-        dudeVert += 10;
+        dude1.y += 20;
+        dudeVert += 20;
         srcY = 3 * spriteHeight;
         srcX = framesDrawn++;
         if (framesDrawn >= 0) {
@@ -532,8 +541,8 @@ function move1 () {
     }
 
    else if (keys.a.pressed && lastKey === 'a' && colliding === false) {
-        dude1.x -= 10;
-        dudeHor -= 10;
+        dude1.x -= 20;
+        dudeHor -= 20;
         srcY = 2 * spriteHeight;
         srcX = framesDrawn++;
         if (framesDrawn >= 0) {
@@ -543,8 +552,8 @@ function move1 () {
     }
 
    else if (keys.d.pressed && lastKey === 'd' && colliding === false){
-        dude1.x += 10;
-        dudeHor += 10;
+        dude1.x += 20;
+        dudeHor += 20;
         srcY = 1 * spriteHeight;
         srcX = framesDrawn++;
         if (framesDrawn >= 0) {
@@ -554,28 +563,28 @@ function move1 () {
 
     }
 
-    else if (colliding=true && keys.w.pressed ){
+    else if (colliding=true && lastKey === 'w' ){
         colliding = false;
-        dude1.y += 10;
-        dudeVert += 10;
+        dude1.y += 20;
+        dudeVert += 20;
         
     }
-    else if (colliding=true && keys.s.pressed){
+    else if (colliding=true && lastKey === 's'){
         
-        dude1.y -= 10;
-        dudeVert -= 10;
+        dude1.y -= 20;
+        dudeVert -= 20;
         colliding = false;
     }
-    else if (colliding=true && keys.a.pressed){
+    else if (colliding=true && lastKey === 'a'){
         
-        dude1.x += 10;
-        dudeHor += 10;
+        dude1.x += 20;
+        dudeHor += 20;
         colliding = false;
     }
-    else if (colliding=true && keys.d.pressed){
+    else if (colliding=true && lastKey === 'd'){
         
-        dude1.x -= 10;
-        dudeHor -= 10;
+        dude1.x -= 20;
+        dudeHor -= 20;
         colliding = false;
     }
 
@@ -888,6 +897,58 @@ function move5 () {
 
     }
     //#endregion
+    //#region 
+function move6 () {
+    if (keys.w.pressed && lastKey === 'w'){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        srcY = 0 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        } 
+        
+    }
+    else if (keys.s.pressed &&  lastKey === 's' ){
+        dude1.y += 10;
+        dudeVert += 10;
+        srcY = 3 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+   else if (keys.a.pressed && lastKey === 'a' ) {
+        dude1.x -= 10;
+        dudeHor -= 10;
+        srcY = 2 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+    }
+
+   else if (keys.d.pressed && lastKey === 'd' ){
+        dude1.x += 10;
+        dudeHor += 10;
+        srcY = 1 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+    
+    }
+    //#endregion
     
 }
 
@@ -939,10 +1000,6 @@ function gameLoop() {
         inside1B.forEach(boundary => {
             boundary.draw();
         })
-
-       
-        
-        
 
 
     } if (door2.alive) {
@@ -1010,10 +1067,11 @@ function gameLoop() {
     } if (gymFight.alive) {
         gymFight.render();
         let hit = gFight(dude1, gymFight);
+        
+
 
 
     }
-
 }
 
 //#endregion
@@ -1592,7 +1650,7 @@ function inGym() {
 
 
     let roomTrans3 = document.querySelector('#outside2');
-    roomTrans3.setAttribute("id", "gym");
+    roomTrans3.setAttribute("id", "butt");
     dude1.x = 300;
     dude1.y = 600;
     dudeHor = 300;
@@ -1644,7 +1702,7 @@ function lastRoom5() {
     gymFight.alive = false;
 
 
-    let roomTrans4 = document.querySelector('#gym');
+    let roomTrans4 = document.querySelector('#butt');
     roomTrans4.setAttribute("id", "outside2");
     dude1.x = 130;
     dude1.y = 360;
@@ -1671,7 +1729,7 @@ let fightScreen1 = document.querySelector('.fightSequence');
 
 
 // player hit values//
-const arr = [50]; //player fight buttons
+const arr = [100]; //player fight buttons
 const arrCrit = [20, 20, 20, 0, 0]; //player fight buttons
 
 
@@ -1896,6 +1954,7 @@ function grassFight(p1, p2) {
 function startFight1() {
     document.querySelector('#mainGame').pause();
     document.querySelector('#fightM').play();
+    document.querySelector('#fightM').volume = 0.2;
 
 
     let fightBoard = document.querySelector('.fight');

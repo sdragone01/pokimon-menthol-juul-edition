@@ -344,7 +344,15 @@ div{
 }
 
 
-#gym{
+#gymIn{
+    background: url(./Assets/gym\ floor.png);
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 4;
+}
+#butt{
     background: url(./Assets/gym\ floor.png);
     background-size: contain;
     position: absolute;
