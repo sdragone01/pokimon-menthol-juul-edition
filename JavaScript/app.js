@@ -14,8 +14,6 @@ let inside1C = inside.getContext('2d');
 // }
 //#endregion
 
-
-
 //#region PLAYER ANIMATION  
 
 // const dude2 = new Image();
@@ -56,7 +54,6 @@ let inside1C = inside.getContext('2d');
 
 //#endregion
 
-
 //#region DOOR VARIABLES
 //FIRST ROOM//
 let dude1;
@@ -90,7 +87,6 @@ let gym2;
 let gymFight;
 
 //#endregion
-
 
 //#region  BOUNDARY ARRAYS
 
@@ -341,11 +337,7 @@ outside2Arr.forEach((row, i) => {
 
 //#endregion
 
-
-
-
-
-
+//#region room objects defined
 
 //FIRST ROOM//
 dude1 = new Object(430, 200, "red", 20, 20);
@@ -376,17 +368,13 @@ gym2 = new Object(220, 630, "transparent", 160, 20);
 gymFight = new Object(310, 100, "transparent", 20, 20);
 
 
-//Boundaries//
-
 
 
 setInterval(gameLoop, 80);
 
+//#endregion
 
-
-
-
-
+//#region MOVEMENT HANDLER
 
 function movementHandler(e) {
 
@@ -450,15 +438,9 @@ function movementHandler(e) {
 
 document.addEventListener("keydown", movementHandler)
 
+//#endregion
 
-
-
-
-
-
-
-
-
+//#region GAME LOOP
 
 function gameLoop() {
     inside1C.clearRect(0, 0, inside.width, inside.height);
@@ -548,7 +530,9 @@ function gameLoop() {
 
 }
 
+//#endregion
 
+//#region poke center functions
 
 function healPokemon(p1, p2) {
     let enterRoom =
@@ -618,7 +602,9 @@ function pokeHealed2() {
 
 }
 
-//function to start all doors dead//
+//#endregion
+
+//#region    function to start all doors dead//
 function doorAlive() {
     door1.alive = true;
     door2.alive = false;
@@ -639,6 +625,9 @@ function doorAlive() {
 
 }
 
+//#endregion
+
+//#region ROOM TRANSITION LOGIC
 
 //FIRST ROOM TO SECOND ROOM//
 function nextRoom(p1, p2) {
@@ -1178,6 +1167,10 @@ function lastRoom5() {
 
 }
 
+//#endregion
+
+//#region FIGHT SEQUENCE LOGIC
+
 //FIGHT SEQUENCES//
 
 let pHealth = document.querySelector('#pHealthNum');
@@ -1514,6 +1507,11 @@ function startFight3() {
 
 
 }
+
+//#endregion
+
+//#region BOUNDARY LOGIC
+
 // function insideBoundary(p1, p2) {
 function insideBoundary(p1, p2) {
 
@@ -1551,3 +1549,5 @@ console.log(positions);
 insideBoundary();
 
 // console.log(inside1B);
+
+//#endregion
