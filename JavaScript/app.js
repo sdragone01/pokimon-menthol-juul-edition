@@ -16,41 +16,41 @@ let inside1C = inside.getContext('2d');
 
 //#region PLAYER ANIMATION  
 
-// const dude2 = new Image();
+const dude2 = new Image();
 
-// dude2.src = './Assets/again3.png';
-// dude2.onload = loadImages;
-// let cols = 4;
-// let rows = 4;
-// let spriteWidth = dude2.width / cols;
-// let spriteHeight = dude2.height / rows;
-// let totalFrames = 4;
-// let currentFrame = 0;
-// let srcX = 0;
-// let srcY = 0;
-// let framesDrawn = 0;
-// let dudeHor = 430;
-// let dudeVert = 200;
+dude2.src = './Assets/again3.png';
+dude2.onload = loadImages;
+let cols = 4;
+let rows = 4;
+let spriteWidth = dude2.width / cols;
+let spriteHeight = dude2.height / rows;
+let totalFrames = 4;
+let currentFrame = 0;
+let srcX = 0;
+let srcY = 0;
+let framesDrawn = 0;
+let dudeHor = 430;
+let dudeVert = 200;
 
 
 
-// function animate() {
-//     inside1C.clearRect(0, 0, inside.width, inside.height);
-//     requestAnimationFrame(animate);
-//     currentFrame = currentFrame % totalFrames;
-//     srcX = currentFrame * spriteWidth;
+function animate() {
+    inside1C.clearRect(0, 0, inside.width, inside.height);
+    requestAnimationFrame(animate);
+    currentFrame = currentFrame % totalFrames;
+    srcX = currentFrame * spriteWidth;
 
-//     inside1C.drawImage(dude2, srcX, srcY, spriteWidth, spriteHeight, dudeHor, dudeVert, spriteWidth, spriteHeight);
-//     inside1C.restore();
+    inside1C.drawImage(dude2, srcX, srcY, spriteWidth, spriteHeight, dudeHor, dudeVert, spriteWidth, spriteHeight);
+    inside1C.restore();
 
-// }
-// animate();
+}
+animate();
 
-// let numOfImages = 4;
-// function loadImages() {
-//     if (--numOfImages > 0) return;
-//     animate();
-// }
+let numOfImages = 4;
+function loadImages() {
+    if (--numOfImages > 0) return;
+    animate();
+}
 
 //#endregion
 
@@ -88,7 +88,7 @@ let gymFight;
 
 //#endregion
 
-//#region  BOUNDARY ARRAYS
+//#region BOUNDARY ARRAYS
 
 //boundaries//
 
@@ -337,10 +337,10 @@ outside2Arr.forEach((row, i) => {
 
 //#endregion
 
-//#region room objects defined
+//#region ROOM OBJECTS DEFINED
 
 //FIRST ROOM//
-dude1 = new Object(430, 200, "red", 20, 20);
+dude1 = new Object(430, 200, "red", 32, 32);
 door1 = new Object(0, 320, "transparent", 30, 20);
 
 //SECOND ROOM//
@@ -376,12 +376,26 @@ setInterval(gameLoop, 80);
 
 //#region MOVEMENT HANDLER
 
+const keys = {
+    w: {
+        pressed:false
+    },
+    s: {
+        pressed:false
+    },
+    a: {
+        pressed:false
+    },
+    d: {
+        pressed:false
+    },
+}
+
 function movementHandler(e) {
-
-
     switch (e.key) {
         case "w":
-            dude1.y -= 10;
+            keys.w.pressed = true
+            // dude1.y -= 10;
             // dudeVert -= 10;
             // srcY = 0 * spriteHeight;
             // srcX = framesDrawn++;
@@ -389,12 +403,14 @@ function movementHandler(e) {
             //     currentFrame++;
             //     framesDrawn = 0;
             // }
+            console.log('a');
 
             break
 
 
         case "s":
-            dude1.y += 10;
+            keys.s.pressed = true
+            // dude1.y += 10;
             // dudeVert += 10;
             // srcY = 3 * spriteHeight;
             // srcX = framesDrawn++;
@@ -405,7 +421,8 @@ function movementHandler(e) {
             break
 
         case "a":
-            dude1.x -= 10;
+            keys.a.pressed = true
+            // dude1.x -= 10;
             // dudeHor -= 10;
             // srcY = 2 * spriteHeight;
             // srcX = framesDrawn++;
@@ -417,6 +434,7 @@ function movementHandler(e) {
 
 
         case "d":
+            keys.d.pressed = true
             // dude1.x += 10;
             // dudeHor += 10;
             // srcY = 1 * spriteHeight;
@@ -426,17 +444,87 @@ function movementHandler(e) {
             //     framesDrawn = 0;
             // }
             break
+    }
+    if (keys.w.pressed){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        srcY = 0 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        } 
+    }
+    if (keys.s.pressed){
+        dude1.y += 10;
+        dudeVert += 10;
+        srcY = 3 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
 
     }
 
-    console.log(dude1);
-    console.log(dudeHor);
-    console.log(dudeVert)
+    if (keys.a.pressed) {
+        dude1.x -= 10;
+        dudeHor -= 10;
+        srcY = 2 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+    }
 
-}
+    if (keys.d.pressed){
+        dude1.x += 10;
+        dudeHor += 10;
+        srcY = 1 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+    }
 
 
 document.addEventListener("keydown", movementHandler)
+
+function movementHandler2(e) {
+    switch (e.key) {
+        case "w":
+            keys.w.pressed = false
+            console.log('nay')
+            break
+
+        case "s":
+            keys.s.pressed = false
+            break
+
+        case "a":
+            keys.a.pressed = false
+            break
+
+
+        case "d":
+            keys.d.pressed = false
+            break
+    }
+    }
+
+document.addEventListener("keyup", movementHandler2)
+
+
+
+
+
+
 
 //#endregion
 
@@ -456,7 +544,7 @@ function gameLoop() {
         })
 
         
-        // let hit2 = insideBoundary(dude1,)
+        let hit2 = insideBoundary(dude1,)
 
 
     } if (door2.alive) {
@@ -532,7 +620,7 @@ function gameLoop() {
 
 //#endregion
 
-//#region poke center functions
+//#region POKE CENTER LOGIC
 
 function healPokemon(p1, p2) {
     let enterRoom =
@@ -604,7 +692,7 @@ function pokeHealed2() {
 
 //#endregion
 
-//#region    function to start all doors dead//
+//#region STARTING DOOR CONDITIONS
 function doorAlive() {
     door1.alive = true;
     door2.alive = false;
@@ -1171,6 +1259,7 @@ function lastRoom5() {
 
 //#region FIGHT SEQUENCE LOGIC
 
+
 //FIGHT SEQUENCES//
 
 let pHealth = document.querySelector('#pHealthNum');
@@ -1512,42 +1601,34 @@ function startFight3() {
 
 //#region BOUNDARY LOGIC
 
-// function insideBoundary(p1, p2) {
-function insideBoundary(p1, p2) {
 
-let positions =[];
+
+function insideBoundary(p1) {
+
+
 for (i =0; i< inside1B.length; i++){
-    positions.push(inside1B[i].position);
+ 
+
+if  (p1.x + p1.width > inside1B[i].position.x &&
+    p1.x < inside1B[i].position.x + 32 &&
+    p1.y + p1.height > inside1B[i].position.y &&
+    p1.y < inside1B[i].position.y +32){
+
+    return boundaryCollision();
+} 
+
+
+   
 };
 
-
-// console.log("x",positions.x);
-
-
-console.log(positions);
-    // let hit =
-
-        // p1.y + p1.height > p2.y &&
-        // p1.y < p2.y + p2.height &&
-        // p1.x + p1.width > p2.x &&
-        // p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
-
-    // if (hit) {
-    //     return startFight2();
+}
 
 
+function boundaryCollision (){
 
-    // } else {
-    //     return false;
-    // }
-
-
-
+    console.log('hit');
 
 
 }
-insideBoundary();
-
-// console.log(inside1B);
 
 //#endregion
