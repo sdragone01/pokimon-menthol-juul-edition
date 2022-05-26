@@ -55,6 +55,24 @@ function loadImages() {
 //#endregion
 
 //#region DOOR VARIABLES
+
+class Object {
+    constructor(x, y, color, width, height) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.width = width;
+        this.height = height;
+        this.alive = true;
+
+    }
+    render() {
+        inside1C.fillStyle = this.color;
+        inside1C.fillRect(this.x, this.y, this.width, this.height,)
+    }
+
+}
+
 //FIRST ROOM//
 let dude1;
 let door1;
@@ -218,28 +236,11 @@ const outside2Arr = [
 
 
 
-
-class Object {
-    constructor(x, y, color, width, height) {
-        this.x = x;
-        this.y = y;
-        this.color = color;
-        this.width = width;
-        this.height = height;
-        this.alive = true;
-
-    }
-    render() {
-        inside1C.fillStyle = this.color;
-        inside1C.fillRect(this.x, this.y, this.width, this.height,)
-    }
-
-}
-
-
 //boundary class for creating x and y coordinate based on true or false value of array//
 
 class Boundary {
+    static width = 32
+    static height = 32
     constructor({ position }) { //position function to be called later//
         this.position = position;
         this.width = 32;
@@ -391,61 +392,122 @@ const keys = {
     },
 }
 
+
 function movementHandler(e) {
+    let lastKey= '';
+    let colliding = false;
+    let colliding2=false;
+    let colliding3=false;
+    let colliding4=false;
+    let colliding5=false;
+
+    for (i =0; i< inside1B.length; i++){
+ 
+
+        if  (dude1.x + dude1.width > inside1B[i].position.x &&
+            dude1.x < inside1B[i].position.x + 32 &&
+            dude1.y + dude1.height > inside1B[i].position.y &&
+            dude1.y < inside1B[i].position.y +32){
+        
+            colliding = true;
+        } 
+    }
+    for (i =0; i< inside2B.length; i++){
+ 
+
+        if  (dude1.x + dude1.width > inside2B[i].position.x &&
+            dude1.x < inside2B[i].position.x + 32 &&
+            dude1.y + dude1.height > inside2B[i].position.y &&
+            dude1.y < inside2B[i].position.y +32){
+        
+            colliding2 = true;
+        } 
+    }
+    for (i =0; i< outside1B.length; i++){
+ 
+
+        if  (dude1.x + dude1.width > outside1B[i].position.x &&
+            dude1.x < outside1B[i].position.x + 32 &&
+            dude1.y + dude1.height > outside1B[i].position.y &&
+            dude1.y < outside1B[i].position.y +32){
+        
+            colliding3 = true;
+        } 
+    }
+    for (i =0; i< caveB.length; i++){
+ 
+
+        if  (dude1.x + dude1.width > caveB[i].position.x &&
+            dude1.x < caveB[i].position.x + 32 &&
+            dude1.y + dude1.height > caveB[i].position.y &&
+            dude1.y < caveB[i].position.y +32){
+        
+            colliding4 = true;
+        } 
+    }
+    for (i =0; i< outside2B.length; i++){
+ 
+
+        if  (dude1.x + dude1.width > outside2B[i].position.x &&
+            dude1.x < outside2B[i].position.x + 32 &&
+            dude1.y + dude1.height > outside2B[i].position.y &&
+            dude1.y < outside2B[i].position.y +32){
+        
+            colliding5 = true;
+        } 
+    }
+
     switch (e.key) {
         case "w":
             keys.w.pressed = true
-            // dude1.y -= 10;
-            // dudeVert -= 10;
-            // srcY = 0 * spriteHeight;
-            // srcX = framesDrawn++;
-            // if (framesDrawn >= 0) {
-            //     currentFrame++;
-            //     framesDrawn = 0;
-            // }
-            console.log('a');
+            lastKey = 'w'
 
             break
 
 
         case "s":
             keys.s.pressed = true
-            // dude1.y += 10;
-            // dudeVert += 10;
-            // srcY = 3 * spriteHeight;
-            // srcX = framesDrawn++;
-            // if (framesDrawn >= 0) {
-            //     currentFrame++;
-            //     framesDrawn = 0;
-            // }
+            lastKey = 's'
+     
             break
 
         case "a":
             keys.a.pressed = true
-            // dude1.x -= 10;
-            // dudeHor -= 10;
-            // srcY = 2 * spriteHeight;
-            // srcX = framesDrawn++;
-            // if (framesDrawn >= 0) {
-            //     currentFrame++;
-            //     framesDrawn = 0;
-            // }
+            lastKey = 'a'
+      
             break
 
 
         case "d":
             keys.d.pressed = true
-            // dude1.x += 10;
-            // dudeHor += 10;
-            // srcY = 1 * spriteHeight;
-            // srcX = framesDrawn++;
-            // if (framesDrawn >= 0) {
-            //     currentFrame++;
-            //     framesDrawn = 0;
-            // }
+            lastKey = 'd'
+
             break
     }
-    if (keys.w.pressed){
+    //#region Door alive movement conditions
+
+if (door1.alive){
+    move1()
+}
+if (door2.alive){
+    move2()
+}
+if (door4.alive){
+    move3()
+}
+if (cave3.alive){
+    move4()
+}
+if (gym.alive){
+    move5()
+}
+//#endregion
+
+//#region inside 1 move controll
+    
+
+function move1 () {
+    if (keys.w.pressed && lastKey === 'w' && colliding === false){
         
         dude1.y -= 10;
         dudeVert -= 10;
@@ -455,8 +517,9 @@ function movementHandler(e) {
             currentFrame++;
             framesDrawn = 0;
         } 
+        
     }
-    if (keys.s.pressed){
+    else if (keys.s.pressed &&  lastKey === 's' && colliding === false){
         dude1.y += 10;
         dudeVert += 10;
         srcY = 3 * spriteHeight;
@@ -468,7 +531,7 @@ function movementHandler(e) {
 
     }
 
-    if (keys.a.pressed) {
+   else if (keys.a.pressed && lastKey === 'a' && colliding === false) {
         dude1.x -= 10;
         dudeHor -= 10;
         srcY = 2 * spriteHeight;
@@ -479,7 +542,7 @@ function movementHandler(e) {
         }
     }
 
-    if (keys.d.pressed){
+   else if (keys.d.pressed && lastKey === 'd' && colliding === false){
         dude1.x += 10;
         dudeHor += 10;
         srcY = 1 * spriteHeight;
@@ -491,8 +554,265 @@ function movementHandler(e) {
 
     }
 
+    else if (colliding=true && keys.w.pressed ){
+        colliding = false;
+        dude1.y += 10;
+        dudeVert += 10;
+        
+    }
+    else if (colliding=true && keys.s.pressed){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        colliding = false;
+    }
+    else if (colliding=true && keys.a.pressed){
+        
+        dude1.x += 10;
+        dudeHor += 10;
+        colliding = false;
+    }
+    else if (colliding=true && keys.d.pressed){
+        
+        dude1.x -= 10;
+        dudeHor -= 10;
+        colliding = false;
     }
 
+    }
+//#endregion
+
+   //#region inside 2 move controlls 
+function move2 () {
+    if (keys.w.pressed && lastKey === 'w' && colliding2 === false){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        srcY = 0 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        } 
+        
+    }
+    else if (keys.s.pressed &&  lastKey === 's' && colliding2 === false){
+        dude1.y += 10;
+        dudeVert += 10;
+        srcY = 3 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+   else if (keys.a.pressed && lastKey === 'a' && colliding2 === false) {
+        dude1.x -= 10;
+        dudeHor -= 10;
+        srcY = 2 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+    }
+
+   else if (keys.d.pressed && lastKey === 'd' && colliding2 === false){
+        dude1.x += 10;
+        dudeHor += 10;
+        srcY = 1 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+    else if (colliding2=true && keys.w.pressed ){
+        colliding2 = false;
+        dude1.y += 10;
+        dudeVert += 10;
+        
+    }
+    else if (colliding2=true && keys.s.pressed){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        colliding2 = false;
+    }
+    else if (colliding2=true && keys.a.pressed){
+        
+        dude1.x += 10;
+        dudeHor += 10;
+        colliding2 = false;
+    }
+    else if (colliding2=true && keys.d.pressed){
+        
+        dude1.x -= 10;
+        dudeHor -= 10;
+        colliding2 = false;
+    }
+
+    }
+    //#endregion
+
+   //#region  
+function move3 () {
+    if (keys.w.pressed && lastKey === 'w' && colliding3 === false){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        srcY = 0 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        } 
+        
+    }
+    else if (keys.s.pressed &&  lastKey === 's' && colliding3 === false){
+        dude1.y += 10;
+        dudeVert += 10;
+        srcY = 3 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+   else if (keys.a.pressed && lastKey === 'a' && colliding3 === false) {
+        dude1.x -= 10;
+        dudeHor -= 10;
+        srcY = 2 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+    }
+
+   else if (keys.d.pressed && lastKey === 'd' && colliding3 === false){
+        dude1.x += 10;
+        dudeHor += 10;
+        srcY = 1 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+    else if (colliding3=true && keys.w.pressed ){
+        colliding3 = false;
+        dude1.y += 10;
+        dudeVert += 10;
+        
+    }
+    else if (colliding3=true && keys.s.pressed){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        colliding3 = false;
+    }
+    else if (colliding3=true && keys.a.pressed){
+        
+        dude1.x += 10;
+        dudeHor += 10;
+        colliding3 = false;
+    }
+    else if (colliding3=true && keys.d.pressed){
+        
+        dude1.x -= 10;
+        dudeHor -= 10;
+        colliding3 = false;
+    }
+
+    }
+    //#endregion
+   //#region  
+function move4 () {
+    if (keys.w.pressed && lastKey === 'w' && colliding4 === false){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        srcY = 0 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        } 
+        
+    }
+    else if (keys.s.pressed &&  lastKey === 's' && colliding4 === false){
+        dude1.y += 10;
+        dudeVert += 10;
+        srcY = 3 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+   else if (keys.a.pressed && lastKey === 'a' && colliding4 === false) {
+        dude1.x -= 10;
+        dudeHor -= 10;
+        srcY = 2 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+    }
+
+   else if (keys.d.pressed && lastKey === 'd' && colliding4 === false){
+        dude1.x += 10;
+        dudeHor += 10;
+        srcY = 1 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+    else if (colliding4=true && keys.w.pressed ){
+        colliding4 = false;
+        dude1.y += 10;
+        dudeVert += 10;
+        
+    }
+    else if (colliding4=true && keys.s.pressed){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        colliding4 = false;
+    }
+    else if (colliding4=true && keys.a.pressed){
+        
+        dude1.x += 10;
+        dudeHor += 10;
+        colliding4 = false;
+    }
+    else if (colliding4=true && keys.d.pressed){
+        
+        dude1.x -= 10;
+        dudeHor -= 10;
+        colliding4 = false;
+    }
+
+    }
+    //#endregion
+    
+}
 
 document.addEventListener("keydown", movementHandler)
 
@@ -543,8 +863,9 @@ function gameLoop() {
             boundary.draw();
         })
 
+       
         
-        let hit2 = insideBoundary(dude1,)
+        
 
 
     } if (door2.alive) {
@@ -1605,6 +1926,7 @@ function startFight3() {
 
 function insideBoundary(p1) {
 
+let colliding = false;
 
 for (i =0; i< inside1B.length; i++){
  
@@ -1614,7 +1936,7 @@ if  (p1.x + p1.width > inside1B[i].position.x &&
     p1.y + p1.height > inside1B[i].position.y &&
     p1.y < inside1B[i].position.y +32){
 
-    return boundaryCollision();
+    colliding = true;
 } 
 
 
