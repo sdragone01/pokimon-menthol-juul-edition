@@ -659,7 +659,7 @@ function move2 () {
     }
     //#endregion
 
-   //#region  
+   //#region Outside 1 move controlls 
 function move3 () {
     if (keys.w.pressed && lastKey === 'w' && colliding3 === false){
         
@@ -735,7 +735,7 @@ function move3 () {
 
     }
     //#endregion
-   //#region  
+   //#region cave move controlls 
 function move4 () {
     if (keys.w.pressed && lastKey === 'w' && colliding4 === false){
         
@@ -807,6 +807,83 @@ function move4 () {
         dude1.x -= 10;
         dudeHor -= 10;
         colliding4 = false;
+    }
+
+    }
+    //#endregion
+    
+   //#region outside 2 move controlls 
+function move5 () {
+    if (keys.w.pressed && lastKey === 'w' && colliding5 === false){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        srcY = 0 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        } 
+        
+    }
+    else if (keys.s.pressed &&  lastKey === 's' && colliding5 === false){
+        dude1.y += 10;
+        dudeVert += 10;
+        srcY = 3 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+   else if (keys.a.pressed && lastKey === 'a' && colliding5 === false) {
+        dude1.x -= 10;
+        dudeHor -= 10;
+        srcY = 2 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+    }
+
+   else if (keys.d.pressed && lastKey === 'd' && colliding5 === false){
+        dude1.x += 10;
+        dudeHor += 10;
+        srcY = 1 * spriteHeight;
+        srcX = framesDrawn++;
+        if (framesDrawn >= 0) {
+            currentFrame++;
+            framesDrawn = 0;
+        }
+
+    }
+
+    else if (colliding5=true && keys.w.pressed ){
+        colliding5 = false;
+        dude1.y += 10;
+        dudeVert += 10;
+        
+    }
+    else if (colliding5=true && keys.s.pressed){
+        
+        dude1.y -= 10;
+        dudeVert -= 10;
+        colliding5 = false;
+    }
+    else if (colliding5=true && keys.a.pressed){
+        
+        dude1.x += 10;
+        dudeHor += 10;
+        colliding5 = false;
+    }
+    else if (colliding5=true && keys.d.pressed){
+        
+        dude1.x -= 10;
+        dudeHor -= 10;
+        colliding5 = false;
     }
 
     }
