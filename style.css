@@ -344,15 +344,15 @@ div{
 }
 
 
-#gymIn{
+#gym{
     background: url(./Assets/gym\ floor.png);
     background-size: contain;
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 4;
+    z-index: 6;
 }
-#butt{
+#eatMe{
     background: url(./Assets/gym\ floor.png);
     background-size: contain;
     position: absolute;
@@ -392,3 +392,36 @@ div{
     display: none;
 }
 
+.youloseGif {
+
+    background-size: contain;
+    width: 640px;
+    height: 640px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 50;
+
+}
+#startOver {
+    background-size: contain;
+    background-color: transparent;
+    color: white;
+    border: 5px solid white;
+    font-family: 'Press Start 2P', cursive;
+    position: absolute;
+    width: 300px;
+    height:70px;
+    margin-top: 450px;
+    margin-left: 170px;
+   top: 0;
+   left: 0;
+    z-index: 50;
+}
+#startOver:hover{
+    cursor: pointer;
+}
+
+#youloseHide {
+    display:none;
+}
