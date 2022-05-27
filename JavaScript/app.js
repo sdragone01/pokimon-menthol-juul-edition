@@ -2,7 +2,7 @@ let inside = document.querySelector("#inside");
 let inside1C = inside.getContext('2d');
 
 
-
+//#region START SCREEN
 
 document.querySelector('#mainM').play();
 document.querySelector('#mainM').volume = 0.02;
@@ -14,13 +14,7 @@ function startScreen() {
     document.querySelector('#mainGame').volume=0.2;
 
 }
-
-
-    
-
-
-
-
+//#endregion
 //#region PLAYER ANIMATION  
 
 const dude2 = new Image();
@@ -60,8 +54,6 @@ function loadImages() {
 }
 
 //#endregion
-
-
 //#region DOOR VARIABLES
 //FIRST ROOM//
 let dude1;
@@ -94,7 +86,7 @@ let gym;
 let gym2;
 let gymFight;
 
-//#endregion
+
 
 
 
@@ -126,7 +118,7 @@ class Object {
 
 
 
-//#endregion
+
 
 
 
@@ -162,17 +154,12 @@ gym = new Object(130, 320, "transparent", 30, 20);
 gym2 = new Object(220, 630, "transparent", 160, 20);
 gymFight = new Object(310, 100, "transparent", 20, 20);
 
-
-//Boundaries//
-
-
-
 setInterval(gameLoop, 80);
 
 
 
-
-
+//#endregion
+//#region MOVEMENT HANDLER
 
 
 function movementHandler(e) {
@@ -241,11 +228,8 @@ document.addEventListener("keydown", movementHandler)
 
 
 
-
-
-
-
-
+//#endregion
+//#region GAME LOOP
 
 function gameLoop() {
     inside1C.clearRect(0, 0, inside.width, inside.height);
@@ -321,7 +305,8 @@ function gameLoop() {
 
 }
 
-
+//#endregion
+//#region HEAL FUNCTIONS
 
 function healPokemon(p1, p2) {
     let enterRoom =
@@ -391,6 +376,8 @@ function pokeHealed2() {
 
 }
 
+//#endregion
+//#region GAME FUNCTIONS
 //function to start all doors dead//
 function doorAlive() {
     door1.alive = true;
@@ -952,7 +939,8 @@ function lastRoom5() {
     dudeVert = 350;
 
 }
-
+//#endregion
+//#region FIGHT FUNCTIONS
 //FIGHT SEQUENCES//
 
 let pHealth = document.querySelector('#pHealthNum');
@@ -1071,7 +1059,8 @@ function attack3() {
         music.play();
         dude1.render();
         inside1C.drawImage(dude2, srcX, srcY, spriteWidth, spriteHeight, dudeHor, dudeVert, spriteWidth, spriteHeight);
-        document.querySelector('#mainGame').play();
+        document.querySelector('#endGame').play();
+        document.querySelector('#endGame').volume=0.5;
         document.querySelector('#fightM').pause();
 
     }
@@ -1306,6 +1295,9 @@ function startFight3() {
 
 }
 
+//#endregion
+//#region RESTART GAME
 function startOver(){
     location.reload();
 }
+//#endregion
