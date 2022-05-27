@@ -2,57 +2,62 @@ let inside = document.querySelector("#inside");
 let inside1C = inside.getContext('2d');
 
 
-//#region MUSIC CONTROLLS 
 
-// document.querySelector('#mainM').play();
-// function startScreen() {
-//     document.querySelector('#mainM').pause();
-//     let hidStart = document.querySelector('.startScreen');
-//     hidStart.setAttribute('id', 'startScreenHide');
-//     document.querySelector('#mainGame').play();
 
-// }
-//#endregion
+document.querySelector('#mainM').play();
+document.querySelector('#mainM').volume = 0.02;
+function startScreen() {
+    document.querySelector('#mainM').pause();
+    let hidStart = document.querySelector('.startScreen');
+    hidStart.setAttribute('id', 'startScreenHide');
+    document.querySelector('#mainGame').play();
+    document.querySelector('#mainGame').volume=0.2;
+
+}
+
+
+    
+
 
 
 
 //#region PLAYER ANIMATION  
 
-// const dude2 = new Image();
+const dude2 = new Image();
 
-// dude2.src = './Assets/again3.png';
-// dude2.onload = loadImages;
-// let cols = 4;
-// let rows = 4;
-// let spriteWidth = dude2.width / cols;
-// let spriteHeight = dude2.height / rows;
-// let totalFrames = 4;
-// let currentFrame = 0;
-// let srcX = 0;
-// let srcY = 0;
-// let framesDrawn = 0;
-// let dudeHor = 430;
-// let dudeVert = 200;
+dude2.src = './Assets/again3.png';
+dude2.onload = loadImages;
+let cols = 4;
+let rows = 4;
+let spriteWidth = dude2.width / cols;
+let spriteHeight = dude2.height / rows;
+let totalFrames = 4;
+let currentFrame = 0;
+let srcX = 0;
+let srcY = 0;
+let framesDrawn = 0;
+let dudeHor = 430;
+let dudeVert = 200;
 
 
 
-// function animate() {
-//     inside1C.clearRect(0, 0, inside.width, inside.height);
-//     requestAnimationFrame(animate);
-//     currentFrame = currentFrame % totalFrames;
-//     srcX = currentFrame * spriteWidth;
+function animate() {
+    inside1C.clearRect(0, 0, inside.width, inside.height);
+    requestAnimationFrame(animate);
+    currentFrame = currentFrame % totalFrames;
+    srcX = currentFrame * spriteWidth;
 
-//     inside1C.drawImage(dude2, srcX, srcY, spriteWidth, spriteHeight, dudeHor, dudeVert, spriteWidth, spriteHeight);
-//     inside1C.restore();
+    inside1C.drawImage(dude2, srcX, srcY, spriteWidth, spriteHeight, dudeHor, dudeVert, spriteWidth, spriteHeight);
+    inside1C.restore();
 
-// }
-// animate();
+}
+animate();
 
-// let numOfImages = 4;
-// function loadImages() {
-//     if (--numOfImages > 0) return;
-//     animate();
-// }
+let numOfImages = 4;
+function loadImages() {
+    if (--numOfImages > 0) return;
+    animate();
+}
 
 //#endregion
 
@@ -92,131 +97,7 @@ let gymFight;
 //#endregion
 
 
-//#region  BOUNDARY ARRAYS
 
-//boundaries//
-
-const room1Arr = [
-
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
-
-const room2Arr = [
-
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]
-];
-
-
-const outside1Arr = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1],
-    [1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
-    [1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1],
-    [1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-    [1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-    [1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
-
-];
-
-const caveArr = [
-
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]
-
-];
-
-const outside2Arr = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0],
-    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-    [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
-];
 
 
 
@@ -241,100 +122,6 @@ class Object {
 }
 
 
-//boundary class for creating x and y coordinate based on true or false value of array//
-
-class Boundary {
-    constructor({ position }) { //position function to be called later//
-        this.position = position;
-        this.width = 32;
-        this.height = 32;
-    }
-    draw() {
-        inside1C.fillStyle = 'red';
-        inside1C.fillRect(this.position.x, this.position.y, this.width, this.height);
-    }
-}
-
-
-
-//room one//
-const inside1B = [] //new array
-
-room1Arr.forEach((row, i) => { //iterate and define row index//
-    row.forEach((symbol, j) => { // iterate and define index within current row//
-        if (symbol === 1)  // if row index contains 1 //
-            inside1B.push(new Boundary({ //create object from boundary class//
-                position: { // create coordinates from multiplying block width and height by its index location//
-                    x: j * 32,
-                    y: i * 32,
-                }
-            }))
-    })
-});
-
-
-//room two//
-const inside2B = []
-
-room2Arr.forEach((row, i) => {
-    row.forEach((symbol, j) => {
-        if (symbol === 1)
-            inside2B.push(new Boundary({
-                position: {
-                    x: j * 32,
-                    y: i * 32,
-                }
-            }))
-    })
-});
-
-
-//outside 1//
-const outside1B = []
-
-outside1Arr.forEach((row, i) => {
-    row.forEach((symbol, j) => {
-        if (symbol === 1)
-            outside1B.push(new Boundary({
-                position: {
-                    x: j * 32,
-                    y: i * 32,
-                }
-            }))
-    })
-});
-
-
-//cave//
-const caveB = []
-
-caveArr.forEach((row, i) => {
-    row.forEach((symbol, j) => {
-        if (symbol === 1)
-            caveB.push(new Boundary({
-                position: {
-                    x: j * 32,
-                    y: i * 32,
-                }
-            }))
-    })
-});
-
-
-//outside 2//
-const outside2B = []
-
-outside2Arr.forEach((row, i) => {
-    row.forEach((symbol, j) => {
-        if (symbol === 1)
-            outside2B.push(new Boundary({
-                position: {
-                    x: j * 32,
-                    y: i * 32,
-                }
-            }))
-    })
-});
 
 
 
@@ -393,50 +180,50 @@ function movementHandler(e) {
 
     switch (e.key) {
         case "w":
-            dude1.y -= 10;
-            // dudeVert -= 10;
-            // srcY = 0 * spriteHeight;
-            // srcX = framesDrawn++;
-            // if (framesDrawn >= 0) {
-            //     currentFrame++;
-            //     framesDrawn = 0;
-            // }
+            dude1.y -= 15;
+            dudeVert -= 15;
+            srcY = 0 * spriteHeight;
+            srcX = framesDrawn++;
+            if (framesDrawn >= 0) {
+                currentFrame++;
+                framesDrawn = 0;
+            }
 
             break
 
 
         case "s":
-            dude1.y += 10;
-            // dudeVert += 10;
-            // srcY = 3 * spriteHeight;
-            // srcX = framesDrawn++;
-            // if (framesDrawn >= 0) {
-            //     currentFrame++;
-            //     framesDrawn = 0;
-            // }
+            dude1.y += 15;
+            dudeVert += 15;
+            srcY = 3 * spriteHeight;
+            srcX = framesDrawn++;
+            if (framesDrawn >= 0) {
+                currentFrame++;
+                framesDrawn = 0;
+            }
             break
 
         case "a":
-            dude1.x -= 10;
-            // dudeHor -= 10;
-            // srcY = 2 * spriteHeight;
-            // srcX = framesDrawn++;
-            // if (framesDrawn >= 0) {
-            //     currentFrame++;
-            //     framesDrawn = 0;
-            // }
+            dude1.x -= 15;
+            dudeHor -= 15;
+            srcY = 2 * spriteHeight;
+            srcX = framesDrawn++;
+            if (framesDrawn >= 0) {
+                currentFrame++;
+                framesDrawn = 0;
+            }
             break
 
 
         case "d":
-            // dude1.x += 10;
-            // dudeHor += 10;
-            // srcY = 1 * spriteHeight;
-            // srcX = framesDrawn++;
-            // if (framesDrawn >= 0) {
-            //     currentFrame++;
-            //     framesDrawn = 0;
-            // }
+            dude1.x += 15;
+            dudeHor += 15;
+            srcY = 1 * spriteHeight;
+            srcX = framesDrawn++;
+            if (framesDrawn >= 0) {
+                currentFrame++;
+                framesDrawn = 0;
+            }
             break
 
     }
@@ -469,20 +256,11 @@ function gameLoop() {
         door1.render();
         let doors = doorAlive();
         let hit = nextRoom(dude1, door1);
-        inside1B.forEach(boundary => {
-            boundary.draw();
-        })
-
-        
-        // let hit2 = insideBoundary(dude1,)
-
 
     } if (door2.alive) {
         door2.render();
         let hit = goOutside(dude1, door2);
-        inside2B.forEach(boundary => {
-            boundary.draw();
-        })
+       
       
 
     } if (door3.alive) {
@@ -496,9 +274,7 @@ function gameLoop() {
     } if (cave.alive) {
         cave.render();
         let hit = enterCave(dude1, cave);
-        outside1B.forEach(boundary => {
-            boundary.draw();
-        })
+       
 
     } if (grass.alive) {
         grass.render();
@@ -511,9 +287,7 @@ function gameLoop() {
     } if (cave2.alive) {
         cave2.render();
         let hit = previousRoom3(dude1, cave2);
-        caveB.forEach(boundary => {
-            boundary.draw();
-        })
+       
 
     } if (cave3.alive) {
         cave3.render();
@@ -526,9 +300,7 @@ function gameLoop() {
     } if (cave4.alive) {
         cave4.render();
         let hit = previousRoom4(dude1, cave4);
-        outside2B.forEach(boundary => {
-            boundary.draw();
-        })
+       
 
     } if (gym.alive) {
         gym.render();
@@ -542,6 +314,7 @@ function gameLoop() {
     } if (gymFight.alive) {
         gymFight.render();
         let hit = gFight(dude1, gymFight);
+        
 
 
     }
@@ -1122,6 +895,8 @@ function inGym() {
     dude1.y = 600;
     dudeHor = 300;
     dudeVert = 590;
+    let bowser = document.querySelector(".bowser");
+    bowser.setAttribute('id','');
 
 }
 
@@ -1191,12 +966,14 @@ let fightScreen1 = document.querySelector('.fightSequence');
 
 
 // player hit values//
-const arr = [50]; //player fight buttons
+const arr = [20,20,10,10,10,5,5,0,0]; //player fight buttons
+
 const arrCrit = [20, 20, 20, 0, 0]; //player fight buttons
 
 
 //computer hit values//
 const arr2 = [20, 10, 5, 5, 5, 0, 0]; //comp1 fight buttons
+
 const arr3 = [20, 10, 10, 10, 5, 5, 0, 0]; //comp2 fight buttons
 const arr4 = [20, 20, 10, 10, 5, 5]; //comp2 fight buttons
 
@@ -1305,7 +1082,7 @@ function attack3() {
 function returnAttack() {
     setTimeout(function () {
         let attackPoints = Number(pHealth.textContent);
-        let randomArr = arr2[Math.floor(Math.random() * arr.length)];
+        let randomArr = arr2[Math.floor(Math.random() * arr2.length)];
         let newHealth = attackPoints - randomArr;
         pHealth.textContent = newHealth;
 
@@ -1318,7 +1095,10 @@ function returnAttack() {
         } else {
             alert("Growlthie used SCRATCH - It was a miss!");
         }
-        console.log(newHealth);
+        if (newHealth <= 0){
+            let youLose = document.querySelector('.youLose')
+            youLose.setAttribute('id',"");
+        }
     }, 3000);
 
 }
@@ -1327,7 +1107,7 @@ function returnAttack() {
 function returnAttack2() {
     setTimeout(function () {
         let attackPoints = Number(pHealth.textContent);
-        let randomArr = arr3[Math.floor(Math.random() * arr.length)];
+        let randomArr = arr3[Math.floor(Math.random() * arr3.length)];
         let newHealth = attackPoints - randomArr;
         pHealth.textContent = newHealth;
 
@@ -1340,7 +1120,10 @@ function returnAttack2() {
         } else {
             alert("Machop used Punch - It was a miss!");
         }
-        console.log(newHealth);
+        if (newHealth <= 0){
+            let youLose = document.querySelector('.youLose')
+            youLose.setAttribute('id',"");
+        }
     }, 3000);
 
 }
@@ -1348,7 +1131,7 @@ function returnAttack2() {
 function returnAttack3() {
     setTimeout(function () {
         let attackPoints = Number(pHealth.textContent);
-        let randomArr = arr4[Math.floor(Math.random() * arr.length)];
+        let randomArr = arr4[Math.floor(Math.random() * arr4.length)];
         let newHealth = attackPoints - randomArr;
         pHealth.textContent = newHealth;
 
@@ -1361,7 +1144,10 @@ function returnAttack3() {
         } else {
             alert("Articuno used Punch - It was a miss!");
         }
-        console.log(newHealth);
+        if (newHealth <= 0){
+            let youLose = document.querySelector('.youLose')
+            youLose.setAttribute('id',"");
+        }
     }, 3000);
 
 }
@@ -1416,6 +1202,7 @@ function grassFight(p1, p2) {
 function startFight1() {
     document.querySelector('#mainGame').pause();
     document.querySelector('#fightM').play();
+    document.querySelector('#fightM').volume =0.5;
 
 
     let fightBoard = document.querySelector('.fight');
@@ -1455,6 +1242,7 @@ function startFight2() {
 
     document.querySelector('#mainGame').pause();
     document.querySelector('#fightM').play();
+    document.querySelector('#fightM').volume =0.5;
 
     let caveFightBoard = document.querySelector('.fight');
     caveFightBoard.setAttribute("id", "fightSequence");
@@ -1499,6 +1287,7 @@ function startFight3() {
 
     document.querySelector('#mainGame').pause();
     document.querySelector('#fightM').play();
+    document.querySelector('#fightM').volume =0.5;
 
     let caveFightBoard = document.querySelector('.fight');
     caveFightBoard.setAttribute("id", "fightSequence");
@@ -1508,46 +1297,15 @@ function startFight3() {
 
     let pokeOpp3 = document.querySelector('.articuno');
     pokeOpp3.setAttribute('id', 'articuno');
+    let bowser = document.querySelector(".bowser");
+    bowser.setAttribute("id","bowserHide")
 
 
 
 
 
 }
-// function insideBoundary(p1, p2) {
-function insideBoundary(p1, p2) {
 
-let positions =[];
-for (i =0; i< inside1B.length; i++){
-    positions.push(inside1B[i].position);
-};
-
-
-// console.log("x",positions.x);
-
-
-console.log(positions);
-    // let hit =
-
-        // p1.y + p1.height > p2.y &&
-        // p1.y < p2.y + p2.height &&
-        // p1.x + p1.width > p2.x &&
-        // p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
-
-    // if (hit) {
-    //     return startFight2();
-
-
-
-    // } else {
-    //     return false;
-    // }
-
-
-
-
-
+function startOver(){
+    location.reload();
 }
-insideBoundary();
-
-// console.log(inside1B);

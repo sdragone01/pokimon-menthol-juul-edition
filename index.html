@@ -18,9 +18,15 @@
 
 <audio src="./Assets/battle.mp3" loop id="fightM"></audio>
 
+<div class="youLose" id="youLoseHide">
+  <img id="losescreen" src="./Assets/b3f54e62430007.5a965f20d8cdb.gif" alt="">
+  <button id="losebtn" onclick="startOver()">Start Over?</button>
+</div>
 
-  <img class="youwin" id="youwinHide" src="./Assets/you win.png" alt="">
-
+<div class="youwin" id="youwinHide">
+  <img class="youwinImg" id="" src="./Assets/giphy.gif" alt="">
+  <button id="losebtn" onclick="startOver()">Start Over?</button>
+</div>
   <div class="fight"id="fightSequenceHide" >
     <div id="buttonBlock"></div>
 
@@ -59,14 +65,14 @@
 </div>
 
 </div>
-<div class="startScreen" id="startScreenHide">
+<div class="startScreen" id="">
 <img  src="./Assets/Sequence111.gif">
 <button id="strtBtn" onclick="startScreen()" ></button>
 </div>
 
   <div>
 
-    
+    <img class="bowser" id="bowserHide" src="./Assets/bowser.gif" alt="">
     <canvas id="inside" width="640" height="640" class=""></canvas>
     
   </div>

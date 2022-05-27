@@ -1,4 +1,12 @@
-
+body{
+    top: 0;
+    left: 0;
+    margin-top: 18%;
+    margin-left: 10%;
+  
+    background-size: cover;
+    
+}
 
 div{
     position: relative;
@@ -31,11 +39,24 @@ div{
     display: none;
 }
 
-#youwin{
+.youwin{
+    width: 640px;
+    height: 640px;
+    background-size: cover;
+    background-color: black;
     position: absolute;
     left: 0;
     top: 0;
     z-index: 20;
+    
+}
+.youwinImg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 20;
+    margin-top: 100px;
+    margin-left: 75px;
 }
 #youwinHide{
     display: none;
@@ -357,8 +378,7 @@ div{
 
     background-size: contain;
     position: absolute;
-    left: 0;
-    top: 0;
+    
     z-index: 40;
 
 }
@@ -376,7 +396,35 @@ div{
    left: 0;
     z-index: 40;
 }
+#losescreen {
+    
+    background-size: contain;
+    position: absolute;
+    
+    z-index: 50;
+    width: 640px;
+    height: 640px;
+}
+
+#losebtn {
+    background-size: contain;
+    background-color: transparent;
+    border: 5px solid white;
+    position: absolute;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    width: 300px;
+    height:70px;
+    margin-top: 450px;
+    margin-left: 170px;
+   top: 0;
+   left: 0;
+    z-index: 50;
+}
 #strtBtn:hover {
+ cursor: pointer;
+}
+#losebtn:hover {
  cursor: pointer;
 }
 
@@ -384,3 +432,19 @@ div{
     display: none;
 }
 
+#youLoseHide {
+    display:None;
+}
+.bowser{
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 40;
+    margin-top: -30px;
+    margin-left: 225px;
+    transform: scale(0.4);
+}
+#bowserHide{
+   display: none;
+}
