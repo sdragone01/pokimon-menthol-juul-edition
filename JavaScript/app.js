@@ -1191,7 +1191,7 @@ function grassFight(p1, p2) {
 function startFight1() {
     document.querySelector('#mainGame').pause();
     document.querySelector('#fightM').play();
-    document.querySelector('#fightM').volume =0.5;
+    document.querySelector('#fightM').volume =0.1;
 
 
     let fightBoard = document.querySelector('.fight');
@@ -1231,7 +1231,7 @@ function startFight2() {
 
     document.querySelector('#mainGame').pause();
     document.querySelector('#fightM').play();
-    document.querySelector('#fightM').volume =0.5;
+    document.querySelector('#fightM').volume =0.1;
 
     let caveFightBoard = document.querySelector('.fight');
     caveFightBoard.setAttribute("id", "fightSequence");
@@ -1276,7 +1276,7 @@ function startFight3() {
 
     document.querySelector('#mainGame').pause();
     document.querySelector('#fightM').play();
-    document.querySelector('#fightM').volume =0.5;
+    document.querySelector('#fightM').volume =0.1;
 
     let caveFightBoard = document.querySelector('.fight');
     caveFightBoard.setAttribute("id", "fightSequence");
